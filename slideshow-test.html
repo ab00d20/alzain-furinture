@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slideshow Test</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background: #1a1a1a; padding: 50px; }
+    
+    .slideshow-wrapper {
+      max-width: 600px;
+      margin: 0 auto 50px;
+      background: #333;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    
+    .slideshow-container {
+      position: relative;
+      width: 100%;
+      height: 400px;
+    }
+    
+    .slide-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: opacity 0.8s ease;
+    }
+    
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 193, 7, 0.9);
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 24px;
+      font-weight: bold;
+      z-index: 100;
+    }
+    
+    .nav-btn:hover {
+      background: #FFC107;
+    }
+    
+    .prev-btn { left: 15px; }
+    .next-btn { right: 15px; }
+    
+    h2 { color: #FFC107; text-align: center; margin-bottom: 20px; }
+    p { color: white; text-align: center; margin-top: 15px; padding: 15px; }
+  </style>
+</head>
+<body>
+
+  <h2>مجموعة رمسيس</h2>
+  <div class="slideshow-wrapper">
+    <div class="slideshow-container" id="ramsis">
+      <img src="PROUDCTS/ramsis/photo_1_2026-01-13_17-10-47.jpg" class="slide-img" style="opacity: 1;">
+      <img src="PROUDCTS/ramsis/photo_2_2026-01-13_17-10-47.jpg" class="slide-img" style="opacity: 0;">
+      <img src="PROUDCTS/ramsis/photo_3_2026-01-13_17-10-47.jpg" class="slide-img" style="opacity: 0;">
+      <img src="PROUDCTS/ramsis/photo_4_2026-01-13_17-10-47.jpg" class="slide-img" style="opacity: 0;">
+      <img src="PROUDCTS/ramsis/photo_5_2026-01-13_17-10-47.jpg" class="slide-img" style="opacity: 0;">
+      <img src="PROUDCTS/ramsis/photo_6_2026-01-13_17-10-47.jpg" class="slide-img" style="opacity: 0;">
+      
+      <button class="nav-btn prev-btn" onclick="changeSlide('ramsis', -1)">❮</button>
+      <button class="nav-btn next-btn" onclick="changeSlide('ramsis', 1)">❯</button>
+    </div>
+    <p id="ramsis-counter">صورة 1 من 6</p>
+  </div>
+
+  <h2>مجموعة رويال</h2>
+  <div class="slideshow-wrapper">
+    <div class="slideshow-container" id="royal">
+      <img src="PROUDCTS/royal/photo_1_2026-01-13_17-12-22.jpg" class="slide-img" style="opacity: 1;">
+      <img src="PROUDCTS/royal/photo_2_2026-01-13_17-12-22.jpg" class="slide-img" style="opacity: 0;">
+      <img src="PROUDCTS/royal/photo_3_2026-01-13_17-12-22.jpg" class="slide-img" style="opacity: 0;">
+      <img src="PROUDCTS/royal/photo_4_2026-01-13_17-12-22.jpg" class="slide-img" style="opacity: 0;">
+      
+      <button class="nav-btn prev-btn" onclick="changeSlide('royal', -1)">❮</button>
+      <button class="nav-btn next-btn" onclick="changeSlide('royal', 1)">❯</button>
+    </div>
+    <p id="royal-counter">صورة 1 من 4</p>
+  </div>
+
+  <script>
+    // Current slide index for each slideshow
+    var currentSlide = {
+      'ramsis': 0,
+      'royal': 0
+    };
+    
+    // Auto slide intervals
+    var autoSlideTimers = {};
+    var pauseTimers = {};
+
+    // Change slide function
+    function changeSlide(id, direction) {
+      var container = document.getElementById(id);
+      var images = container.getElementsByClassName('slide-img');
+      var total = images.length;
+      
+      // Calculate new index
+      var newIndex = currentSlide[id] + direction;
+      if (newIndex >= total) newIndex = 0;
+      if (newIndex < 0) newIndex = total - 1;
+      
+      // Hide all images
+      for (var i = 0; i < images.length; i++) {
+        images[i].style.opacity = '0';
+      }
+      
+      // Show current image
+      images[newIndex].style.opacity = '1';
+      currentSlide[id] = newIndex;
+      
+      // Update counter
+      document.getElementById(id + '-counter').textContent = 'صورة ' + (newIndex + 1) + ' من ' + total;
+      
+      // Pause auto slide for 20 seconds
+      pauseAutoSlide(id);
+    }
+    
+    // Go to specific slide
+    function goToSlide(id, index) {
+      var container = document.getElementById(id);
+      var images = container.getElementsByClassName('slide-img');
+      
+      for (var i = 0; i < images.length; i++) {
+        images[i].style.opacity = '0';
+      }
+      images[index].style.opacity = '1';
+      currentSlide[id] = index;
+      
+      document.getElementById(id + '-counter').textContent = 'صورة ' + (index + 1) + ' من ' + images.length;
+    }
+    
+    // Start auto slide
+    function startAutoSlide(id) {
+      if (autoSlideTimers[id]) {
+        clearInterval(autoSlideTimers[id]);
+      }
+      autoSlideTimers[id] = setInterval(function() {
+        changeSlide(id, 1);
+      }, 4000);
+    }
+    
+    // Pause auto slide for 20 seconds
+    function pauseAutoSlide(id) {
+      // Clear existing timers
+      if (autoSlideTimers[id]) {
+        clearInterval(autoSlideTimers[id]);
+        autoSlideTimers[id] = null;
+      }
+      if (pauseTimers[id]) {
+        clearTimeout(pauseTimers[id]);
+      }
+      
+      // Resume after 20 seconds
+      pauseTimers[id] = setTimeout(function() {
+        startAutoSlide(id);
+      }, 20000);
+    }
+    
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('Page loaded, starting slideshows...');
+      
+      // Start auto slide for both
+      startAutoSlide('ramsis');
+      startAutoSlide('royal');
+      
+      console.log('Slideshows started!');
+    });
+  </script>
+
+</body>
+</html>

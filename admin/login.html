@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  
+  <!-- 🔒 SECURITY HEADERS -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    font-src 'self' https://fonts.gstatic.com;
+    img-src 'self' data: blob:;
+    connect-src 'self';
+    frame-ancestors 'none';
+    form-action 'self';
+    base-uri 'self';
+    object-src 'none';
+  ">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+  <!-- Prevent caching of sensitive pages -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  
+  <title>🔒 تسجيل الدخول - لوحة التحكم</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    body { 
+      font-family: 'Tajawal', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      min-height: -webkit-fill-available;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    
+    html {
+      height: -webkit-fill-available;
+    }
+    
+    .login-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      animation: fadeIn 0.5s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-10px); }
+      75% { transform: translateX(10px); }
+    }
+    
+    .shake {
+      animation: shake 0.4s ease;
+    }
+    
+    .gradient-text {
+      background: linear-gradient(135deg, #FFC107, #FF9800);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    /* Mobile optimizations */
+    @media (max-width: 480px) {
+      .login-card {
+        padding: 24px 20px !important;
+        border-radius: 20px;
+        margin: 10px;
+      }
+      
+      .login-card h1 {
+        font-size: 1.75rem !important;
+      }
+      
+      .w-20 {
+        width: 60px !important;
+        height: 60px !important;
+      }
+      
+      .w-20 svg {
+        width: 30px !important;
+        height: 30px !important;
+      }
+      
+      input {
+        font-size: 16px !important; /* Prevents zoom on iOS */
+      }
+      
+      button[type="submit"] {
+        padding: 14px !important;
+        font-size: 1rem !important;
+      }
+    }
+    
+    /* Touch device optimizations */
+    @media (hover: none) and (pointer: coarse) {
+      button, input {
+        min-height: 48px;
+      }
+    }
+    
+    /* Safe area for notched phones */
+    @supports (padding: max(0px)) {
+      body {
+        padding-top: max(20px, env(safe-area-inset-top));
+        padding-bottom: max(20px, env(safe-area-inset-bottom));
+      }
+    }
+    
+    /* Prevent iOS zoom on input focus */
+    input, select, textarea {
+      font-size: 16px !important;
+    }
+    
+    /* Better button tap */
+    button {
+      -webkit-tap-highlight-color: transparent;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-card p-8 md:p-12 max-w-md w-full mx-4">
+    <div class="text-center mb-8">
+      <div class="w-20 h-20 mx-auto mb-4 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, #FFC107, #FF9800);">
+        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+        </svg>
+      </div>
+      <h1 class="text-3xl font-black mb-2">لوحة التحكم</h1>
+      <p class="text-gray-600 font-bold">مصنع الزين للمفروشات</p>
+    </div>
+
+    <form id="loginForm" class="space-y-6">
+      <div>
+        <label class="block text-sm font-bold mb-2 text-gray-700">كلمة المرور</label>
+        <div class="relative">
+          <input 
+            type="password" 
+            id="passwordInput" 
+            class="w-full px-4 py-3 rounded-xl border-2 border-gray-300 focus:border-purple-500 focus:outline-none transition-all font-bold"
+            placeholder="أدخل كلمة المرور"
+            autofocus
+          >
+          <button 
+            type="button" 
+            onclick="togglePassword()" 
+            class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+          >
+            <svg id="eyeIcon" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div id="errorMessage" class="hidden p-3 rounded-xl bg-red-50 text-red-700 text-sm font-bold text-center">
+        <svg class="w-5 h-5 inline-block ml-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        كلمة المرور غير صحيحة
+      </div>
+
+      <button 
+        type="submit" 
+        class="w-full py-4 rounded-xl text-white font-black text-lg transition-all hover:scale-105 active:scale-95"
+        style="background: linear-gradient(135deg, #667eea, #764ba2);"
+      >
+        🔓 دخول
+      </button>
+    </form>
+
+    <div id="setupNotice" class="mt-6 p-4 rounded-xl bg-blue-50 text-blue-800 text-sm font-bold text-center">
+      <svg class="w-5 h-5 inline-block ml-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+      </svg>
+      كلمة المرور الافتراضية: <span class="gradient-text">admin123</span>
+    </div>
+
+    <div class="mt-4 text-center text-sm text-gray-500 font-bold">
+      <span id="attemptsText"></span>
+    </div>
+  </div>
+
+  <script>
+    // 🔐 SECURITY: SHA-256 Hash Function for secure password storage
+    async function hashPassword(password) {
+      const msgBuffer = new TextEncoder().encode(password);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    // 🔐 SECURITY: Sanitize input to prevent XSS
+    function sanitizeInput(str) {
+      if (!str) return '';
+      return str.replace(/[<>&"']/g, char => ({
+        '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;', "'": '&#039;'
+      }[char]));
+    }
+    
+    // 🔐 SECURITY: Log suspicious activity
+    function logSecurityEvent(event, details = {}) {
+      try {
+        const logs = JSON.parse(localStorage.getItem('alzain_security_logs') || '[]');
+        logs.push({
+          event: event,
+          details: details,
+          timestamp: new Date().toISOString(),
+          userAgent: navigator.userAgent.substring(0, 100)
+        });
+        // Keep only last 100 logs
+        if (logs.length > 100) logs.shift();
+        localStorage.setItem('alzain_security_logs', JSON.stringify(logs));
+      } catch (e) {}
+    }
+
+    // Security Configuration
+    const MAX_ATTEMPTS = 5;
+    const LOCKOUT_TIME = 15 * 60 * 1000; // 15 minutes
+    const SESSION_TIMEOUT = 30 * 60 * 1000; // 30 minutes
+
+    // Check if locked out
+    function checkLockout() {
+      const lockoutUntil = localStorage.getItem('alzain_lockout_until');
+      if (lockoutUntil) {
+        const lockoutTime = parseInt(lockoutUntil);
+        if (Date.now() < lockoutTime) {
+          const remainingMinutes = Math.ceil((lockoutTime - Date.now()) / 60000);
+          showError(`تم قفل الحساب لمدة ${remainingMinutes} دقيقة`);
+          document.getElementById('passwordInput').disabled = true;
+          document.querySelector('button[type="submit"]').disabled = true;
+          return true;
+        } else {
+          localStorage.removeItem('alzain_lockout_until');
+          localStorage.removeItem('alzain_login_attempts');
+        }
+      }
+      return false;
+    }
+
+    // Update attempts display
+    function updateAttempts() {
+      const attempts = parseInt(localStorage.getItem('alzain_login_attempts') || '0');
+      const attemptsText = document.getElementById('attemptsText');
+      
+      if (attempts > 0) {
+        const remaining = MAX_ATTEMPTS - attempts;
+        attemptsText.textContent = `محاولات متبقية: ${remaining}`;
+        attemptsText.className = remaining <= 2 ? 'text-red-500 font-bold' : 'text-gray-500 font-bold';
+      }
+    }
+
+    // Show error message
+    function showError(message) {
+      const errorDiv = document.getElementById('errorMessage');
+      errorDiv.textContent = message;
+      errorDiv.classList.remove('hidden');
+      document.getElementById('loginForm').classList.add('shake');
+      setTimeout(() => {
+        document.getElementById('loginForm').classList.remove('shake');
+      }, 400);
+    }
+
+    // Toggle password visibility
+    function togglePassword() {
+      const input = document.getElementById('passwordInput');
+      input.type = input.type === 'password' ? 'text' : 'password';
+    }
+
+    // Handle login
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      if (checkLockout()) return;
+      
+      const password = document.getElementById('passwordInput').value;
+      
+      // 🔐 SECURITY: Basic input validation
+      if (!password || password.length < 4 || password.length > 100) {
+        showError('كلمة المرور يجب أن تكون بين 4-100 حرف');
+        return;
+      }
+      
+      const passwordHash = await hashPassword(password);
+      
+      // Get stored password hash (default: admin123)
+      const defaultHash = await hashPassword('admin123');
+      const storedHash = localStorage.getItem('alzain_admin_password') || defaultHash;
+      
+      if (passwordHash === storedHash) {
+        // 🔐 SECURITY: Successful login - generate secure session token
+        const randomBytes = new Uint8Array(32);
+        crypto.getRandomValues(randomBytes);
+        const sessionToken = Array.from(randomBytes, b => b.toString(16).padStart(2, '0')).join('');
+        const sessionExpiry = Date.now() + SESSION_TIMEOUT;
+        
+        localStorage.setItem('alzain_admin_session', sessionToken);
+        localStorage.setItem('alzain_session_expiry', sessionExpiry);
+        localStorage.removeItem('alzain_login_attempts');
+        localStorage.removeItem('alzain_lockout_until');
+        
+        // Track login
+        const loginCount = parseInt(localStorage.getItem('alzain_admin_login_count') || '0') + 1;
+        localStorage.setItem('alzain_admin_login_count', loginCount);
+        localStorage.setItem('alzain_last_login', new Date().toISOString());
+        
+        // 🔐 SECURITY: Log successful login
+        logSecurityEvent('login_success', { loginCount });
+        
+        // Redirect to admin panel
+        window.location.href = 'admin-simple.html';
+      } else {
+        // Failed login
+        const attempts = parseInt(localStorage.getItem('alzain_login_attempts') || '0') + 1;
+        localStorage.setItem('alzain_login_attempts', attempts);
+        
+        // 🔐 SECURITY: Log failed attempt
+        logSecurityEvent('login_failed', { attemptNumber: attempts });
+        
+        if (attempts >= MAX_ATTEMPTS) {
+          const lockoutUntil = Date.now() + LOCKOUT_TIME;
+          localStorage.setItem('alzain_lockout_until', lockoutUntil);
+          logSecurityEvent('account_locked', { lockoutMinutes: 15 });
+          showError('تم قفل الحساب لمدة 15 دقيقة بسبب المحاولات الفاشلة');
+          document.getElementById('passwordInput').disabled = true;
+          document.querySelector('button[type="submit"]').disabled = true;
+        } else {
+          showError(`كلمة المرور غير صحيحة (محاولة ${attempts}/${MAX_ATTEMPTS})`);
+        }
+        
+        updateAttempts();
+        document.getElementById('passwordInput').value = '';
+      }
+    });
+
+    // Hide setup notice if password was changed
+    async function checkSetupNotice() {
+      const defaultHash = await hashPassword('admin123');
+      const storedHash = localStorage.getItem('alzain_admin_password');
+      
+      if (storedHash && storedHash !== defaultHash) {
+        document.getElementById('setupNotice').style.display = 'none';
+      }
+    }
+
+    // Initialize
+    checkLockout();
+    updateAttempts();
+    checkSetupNotice();
+  </script>
+</body>
+</html>

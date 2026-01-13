@@ -1,0 +1,3672 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#FFC107">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  
+  <!-- 🔒 SECURITY HEADERS -->
+  <!-- Content Security Policy - Prevents XSS attacks -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com https://www.google-analytics.com https://connect.facebook.net;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    font-src 'self' https://fonts.gstatic.com;
+    img-src 'self' data: blob: https:;
+    connect-src 'self' https://generativelanguage.googleapis.com https://api.openai.com https://api.stability.ai https://www.google-analytics.com https://www.facebook.com;
+    frame-ancestors 'none';
+    form-action 'self';
+    base-uri 'self';
+    object-src 'none';
+  ">
+  <!-- Prevent MIME type sniffing -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <!-- Prevent clickjacking -->
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <!-- XSS Protection -->
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+  <!-- Referrer Policy -->
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <!-- Permissions Policy -->
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+  
+  <title>مصنع الزين للمفروشات | Ultimate Premium</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { direction: rtl; scroll-behavior: smooth; }
+    
+    /* Theme Variables */
+    :root {
+      --bg-primary: #FFFFFF;
+      --bg-secondary: #f5f5f5;
+      --text-primary: #1a1a1a;
+      --text-secondary: #666;
+      --text-tertiary: #888;
+      --glass-bg: rgba(255, 255, 255, 0.8);
+      --glass-border: rgba(0, 0, 0, 0.08);
+      --card-bg: rgba(255, 255, 255, 0.95);
+      --blur-amount: 50px;
+      --logo-bg: rgba(255, 255, 255, 0.95);
+    }
+    
+    body.dark-mode {
+      --bg-primary: #0a0a0a;
+      --bg-secondary: #1a1a1a;
+      --text-primary: #ffffff;
+      --text-secondary: #d1d1d1;
+      --text-tertiary: #999;
+      --glass-bg: rgba(20, 20, 20, 0.85);
+      --glass-border: rgba(255, 193, 7, 0.15);
+      --card-bg: rgba(25, 25, 25, 0.9);
+      --blur-amount: 20px;
+      --logo-bg: rgba(30, 30, 30, 0.95);
+    }
+    
+    body { 
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Tajawal', sans-serif;
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    
+    /* Scroll Progress Bar */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 4px;
+      background: linear-gradient(90deg, #FFC107, #FFD54F);
+      z-index: 9998;
+      transition: width 0.1s ease;
+      box-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+    }
+    
+    /* Loading Screen */
+    .loading-screen {
+      position: fixed;
+      inset: 0;
+      background: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    
+    .loading-screen.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+    
+    .loader {
+      width: 80px;
+      height: 80px;
+      border: 4px solid rgba(255, 193, 7, 0.2);
+      border-top-color: #FFC107;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    /* Premium Glass */
+    .glass-premium {
+      background: var(--glass-bg);
+      backdrop-filter: blur(var(--blur-amount)) saturate(150%);
+      -webkit-backdrop-filter: blur(var(--blur-amount)) saturate(150%);
+      border: 2px solid var(--glass-border);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 4px 16px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+    
+    body.dark-mode .glass-premium {
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 4px 16px rgba(255, 193, 7, 0.1);
+    }
+    
+    .glass-gold {
+      background: linear-gradient(135deg, rgba(255, 193, 7, 0.25) 0%, rgba(255, 213, 79, 0.15) 50%, rgba(255, 193, 7, 0.2) 100%);
+      backdrop-filter: blur(30px) saturate(150%);
+      -webkit-backdrop-filter: blur(30px) saturate(150%);
+      border: 2px solid rgba(255, 193, 7, 0.4);
+      box-shadow: 0 8px 24px rgba(255, 193, 7, 0.2), 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+    
+    body.dark-mode .glass-gold {
+      backdrop-filter: blur(20px) saturate(150%);
+      -webkit-backdrop-filter: blur(20px) saturate(150%);
+      box-shadow: 0 8px 24px rgba(255, 193, 7, 0.3), 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Magnetic Button */
+    .btn-magnetic {
+      background: linear-gradient(135deg, #FFC107 0%, #FFD54F 50%, #FFB300 100%);
+      border: 2.5px solid rgba(255, 180, 0, 0.4);
+      box-shadow: 0 15px 45px rgba(255, 193, 7, 0.35), 0 8px 20px rgba(0, 0, 0, 0.15), inset 0 3px 0 rgba(255, 255, 255, 0.5);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn-magnetic::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+      transition: left 0.6s;
+    }
+    
+    .btn-magnetic:hover::before {
+      left: 100%;
+    }
+    
+    /* Ripple Effect */
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 193, 7, 0.5);
+      transform: scale(0);
+      animation: ripple-animation 0.6s ease-out;
+      pointer-events: none;
+    }
+    
+    @keyframes ripple-animation {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+    
+    /* 3D Card Transform */
+    .card-3d {
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+      position: relative;
+    }
+    
+    .card-3d::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 2.5px;
+      background: linear-gradient(135deg, rgba(255, 193, 7, 0.6), rgba(255, 213, 79, 0.3), rgba(255, 193, 7, 0.5));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+    
+    .card-3d:hover::before {
+      opacity: 1;
+    }
+    
+    /* Number Counter Animation */
+    .counter {
+      font-variant-numeric: tabular-nums;
+    }
+    
+    /* Parallax Layers */
+    .parallax-layer {
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    /* Scroll Reveal */
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .scroll-reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Before/After Slider */
+    .before-after-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+    }
+    
+    .before-after-slider {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: #FFC107;
+      cursor: ew-resize;
+      z-index: 10;
+    }
+    
+    .before-after-slider::before {
+      content: '⟷';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 50px;
+      height: 50px;
+      background: #FFC107;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: #000;
+      box-shadow: 0 4px 12px rgba(255, 193, 7, 0.4);
+    }
+    
+    .before-after-image {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* Image Lightbox */
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .lightbox.active {
+      display: flex;
+      opacity: 1;
+    }
+    
+    .lightbox-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .lightbox-image {
+      max-width: 100%;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+    }
+    
+    .lightbox-close {
+      position: fixed;
+      top: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: rgba(255, 193, 7, 0.9);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 28px;
+      font-weight: bold;
+      color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      transition: all 0.3s ease;
+    }
+    
+    .lightbox-close:hover {
+      background: #FFC107;
+      transform: scale(1.1) rotate(90deg);
+    }
+    
+    .lightbox-arrow {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 60px;
+      height: 60px;
+      background: rgba(255, 193, 7, 0.9);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    
+    .lightbox-arrow:hover {
+      background: #FFC107;
+      transform: translateY(-50%) scale(1.1);
+    }
+    
+    .lightbox-arrow.left { left: 30px; }
+    .lightbox-arrow.right { right: 30px; }
+    
+    .lightbox-counter {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 193, 7, 0.9);
+      color: #000;
+      padding: 10px 30px;
+      border-radius: 50px;
+      font-weight: bold;
+      font-size: 16px;
+      z-index: 10000;
+    }
+    
+    .slide-img {
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    
+    .slide-img:hover {
+      transform: scale(1.02);
+    }
+    
+    .before-image {
+      clip-path: inset(0 50% 0 0);
+      transition: clip-path 0.1s ease;
+    }
+    
+    /* Morphing Background */
+    .morph-bg {
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      filter: blur(100px);
+      opacity: 0.3;
+      animation: morph 8s ease-in-out infinite;
+    }
+    
+    @keyframes morph {
+      0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+      50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+    }
+    
+    /* Floating Animation */
+    .float-slow {
+      animation: float-slow 6s ease-in-out infinite;
+    }
+    
+    @keyframes float-slow {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+    
+    /* Gradient Animation */
+    .gradient-animate {
+      background-size: 200% 200%;
+      animation: gradient-shift 3s ease infinite;
+    }
+    
+    @keyframes gradient-shift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    
+    /* Dark Mode Toggle Button */
+    .dark-mode-toggle {
+      width: 50px;
+      height: 50px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(30px);
+      border: 2px solid rgba(255, 193, 7, 0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(255, 193, 7, 0.15);
+    }
+    
+    .dark-mode-toggle:hover {
+      transform: scale(1.1);
+      border-color: rgba(255, 193, 7, 0.5);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15), 0 6px 16px rgba(255, 193, 7, 0.25);
+    }
+    
+    .dark-mode-toggle svg {
+      width: 24px;
+      height: 24px;
+      transition: transform 0.3s ease;
+    }
+    
+    .dark-mode-toggle:hover svg {
+      transform: rotate(20deg);
+    }
+    
+    /* AI Modal */
+    .ai-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .ai-modal.active {
+      display: flex;
+      opacity: 1;
+    }
+    
+    .ai-modal-content {
+      background: var(--glass-bg);
+      backdrop-filter: blur(40px);
+      border: 2px solid rgba(255, 193, 7, 0.3);
+      border-radius: 24px;
+      padding: 40px;
+      max-width: 900px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3), 0 10px 40px rgba(255, 193, 7, 0.2);
+    }
+    
+    .ai-modal.active .ai-modal-content {
+      transform: scale(1);
+    }
+    
+    .upload-zone {
+      border: 3px dashed rgba(255, 193, 7, 0.4);
+      border-radius: 20px;
+      padding: 60px 40px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: var(--card-bg);
+    }
+    
+    .upload-zone:hover {
+      border-color: rgba(255, 193, 7, 0.7);
+      background: rgba(255, 193, 7, 0.05);
+      transform: translateY(-4px);
+    }
+    
+    .upload-zone.dragover {
+      border-color: #FFC107;
+      background: rgba(255, 193, 7, 0.1);
+      transform: scale(1.02);
+    }
+    
+    /* AI Button - Ultra Attractive */
+    .ai-magic-btn {
+      background: linear-gradient(135deg, #8B5CF6, #EC4899, #F97316);
+      background-size: 200% 200%;
+      animation: ai-gradient 3s ease infinite;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .ai-magic-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      transform: translateX(-100%);
+      animation: ai-shimmer 2s infinite;
+    }
+    
+    .ai-magic-btn:hover {
+      transform: scale(1.08) translateY(-2px);
+      box-shadow: 0 15px 40px rgba(139, 92, 246, 0.5), 0 0 60px rgba(236, 72, 153, 0.3);
+    }
+    
+    .ai-magic-btn .ai-icon {
+      animation: ai-pulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes ai-gradient {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    
+    @keyframes ai-shimmer {
+      0% { transform: translateX(-100%); }
+      50%, 100% { transform: translateX(100%); }
+    }
+    
+    @keyframes ai-pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+    
+    /* Sparkles animation */
+    .sparkle {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0;
+      animation: sparkle 1.5s ease-in-out infinite;
+    }
+    
+    @keyframes sparkle {
+      0%, 100% { opacity: 0; transform: scale(0); }
+      50% { opacity: 1; transform: scale(1); }
+    }
+    
+    /* Color Picker Styles */
+    .color-option {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 3px solid transparent;
+      position: relative;
+    }
+    
+    .color-option:hover {
+      transform: scale(1.15);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    }
+    
+    .color-option.selected {
+      border-color: #FFC107;
+      transform: scale(1.1);
+      box-shadow: 0 0 0 4px rgba(255, 193, 7, 0.3);
+    }
+    
+    .color-option.selected::after {
+      content: '✓';
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    }
+    
+    .custom-color-input {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 3px dashed rgba(255, 193, 7, 0.5);
+      background: conic-gradient(red, yellow, lime, aqua, blue, magenta, red);
+      transition: all 0.3s ease;
+    }
+    
+    .custom-color-input:hover {
+      transform: scale(1.15);
+      border-color: #FFC107;
+    }
+    
+    /* Step animation */
+    .step-item {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease;
+    }
+    
+    .step-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* AI Processing Animation */
+    .ai-processing {
+      background: linear-gradient(90deg, #8B5CF6, #EC4899, #F97316, #8B5CF6);
+      background-size: 300% 100%;
+      animation: ai-processing 1.5s linear infinite;
+    }
+    
+    @keyframes ai-processing {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+    
+    ::-webkit-scrollbar { width: 14px; }
+    ::-webkit-scrollbar-track { background: var(--bg-secondary); }
+    ::-webkit-scrollbar-thumb { 
+      background: linear-gradient(180deg, #FFC107, #FFB300);
+      border-radius: 10px;
+      border: 3px solid var(--bg-secondary);
+    }
+    
+    /* ================================================== */
+    /* MOBILE RESPONSIVE STYLES */
+    /* ================================================== */
+    
+    /* Small phones */
+    @media (max-width: 480px) {
+      html { font-size: 14px; }
+      
+      .ai-modal-content {
+        padding: 20px 15px;
+        border-radius: 16px;
+        max-height: 95vh;
+      }
+      
+      .ai-modal-content h2 {
+        font-size: 1.5rem !important;
+      }
+      
+      .upload-zone {
+        padding: 30px 15px;
+      }
+      
+      .upload-zone h3 {
+        font-size: 1rem;
+      }
+      
+      .color-option {
+        width: 36px;
+        height: 36px;
+      }
+      
+      .custom-color-input {
+        width: 36px;
+        height: 36px;
+      }
+      
+      .lightbox-arrow {
+        width: 40px;
+        height: 40px;
+      }
+      
+      .lightbox-arrow.left { left: 10px; }
+      .lightbox-arrow.right { right: 10px; }
+      
+      .lightbox-close {
+        top: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+      }
+      
+      .morph-bg {
+        width: 300px;
+        height: 300px;
+      }
+    }
+    
+    /* Tablets and small laptops */
+    @media (max-width: 768px) {
+      .ai-modal {
+        padding: 10px;
+      }
+      
+      .ai-modal-content {
+        padding: 25px 20px;
+        max-height: 92vh;
+      }
+      
+      .ai-modal-content .flex.items-center.justify-between {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+      
+      .upload-zone {
+        padding: 40px 20px;
+      }
+      
+      .color-option {
+        width: 40px;
+        height: 40px;
+      }
+      
+      #generateBtn {
+        font-size: 1rem;
+        padding: 16px 20px;
+      }
+      
+      .lightbox-arrow {
+        width: 45px;
+        height: 45px;
+      }
+      
+      .lightbox-counter {
+        font-size: 14px;
+        padding: 8px 20px;
+      }
+      
+      /* Fix header on mobile */
+      header .flex {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      
+      /* Mobile nav */
+      nav {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+      }
+      
+      /* Product cards on mobile */
+      .glass-premium.rounded-3xl {
+        margin-bottom: 20px;
+      }
+      
+      /* Hero section mobile */
+      .text-5xl, .text-6xl, .text-7xl {
+        font-size: 2rem !important;
+        line-height: 1.2 !important;
+      }
+      
+      .morph-bg {
+        width: 350px;
+        height: 350px;
+        opacity: 0.2;
+      }
+    }
+    
+    /* Medium screens */
+    @media (max-width: 1024px) {
+      .ai-modal-content {
+        max-width: 95%;
+      }
+      
+      /* Two column grid becomes one */
+      .grid-cols-2 {
+        grid-template-columns: 1fr !important;
+      }
+      
+      .grid-cols-3 {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+    }
+    
+    /* Touch device optimizations */
+    @media (hover: none) and (pointer: coarse) {
+      .btn-magnetic:hover::before {
+        display: none;
+      }
+      
+      .card-3d:hover {
+        transform: none;
+      }
+      
+      .color-option:hover {
+        transform: none;
+      }
+      
+      .color-option:active {
+        transform: scale(1.1);
+      }
+      
+      .upload-zone:hover {
+        transform: none;
+      }
+      
+      .upload-zone:active {
+        border-color: rgba(255, 193, 7, 0.7);
+        background: rgba(255, 193, 7, 0.05);
+      }
+      
+      /* Better tap targets for touch */
+      button, a, .color-option {
+        min-height: 44px;
+        min-width: 44px;
+      }
+      
+      /* Disable hover effects that don't work on touch */
+      .slide-img:hover {
+        transform: none;
+      }
+    }
+    
+    /* Landscape mobile */
+    @media (max-height: 500px) and (orientation: landscape) {
+      .ai-modal-content {
+        max-height: 85vh;
+        padding: 15px;
+      }
+      
+      .upload-zone {
+        padding: 20px;
+      }
+    }
+    
+    /* Safe area for notched phones */
+    @supports (padding: max(0px)) {
+      .ai-modal {
+        padding-top: max(20px, env(safe-area-inset-top));
+        padding-bottom: max(20px, env(safe-area-inset-bottom));
+        padding-left: max(10px, env(safe-area-inset-left));
+        padding-right: max(10px, env(safe-area-inset-right));
+      }
+      
+      header {
+        padding-top: max(20px, env(safe-area-inset-top));
+      }
+      
+      footer {
+        padding-bottom: max(40px, env(safe-area-inset-bottom));
+      }
+    }
+    
+    /* Reduce animations on low-power devices */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      
+      .morph-bg {
+        animation: none;
+      }
+      
+      .float-slow {
+        animation: none;
+      }
+    }
+    
+    /* Fix for iOS momentum scrolling */
+    .ai-modal-content {
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Prevent text selection on buttons */
+    button {
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+  </style>
+
+  <!-- Meta Pixel Code - Ultra Professional Tracking -->
+  <script>
+    // =====================================================
+    // META PIXEL PROFESSIONAL CONFIGURATION
+    // =====================================================
+    
+    // Load Pixel ID from localStorage
+    var metaPixelId = localStorage.getItem('alzain_meta_pixel_id') || '';
+    var metaPixelDeactivated = localStorage.getItem('alzain_meta_pixel_deactivated') === 'true';
+    var metaPixelLoaded = false;
+    var metaPixelError = null;
+    
+    // Session tracking for accurate analytics
+    var pixelSessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    var pixelPageLoadTime = new Date().toISOString();
+    var pixelEventsLog = [];
+    
+    // Get or create unique visitor ID
+    var pixelVisitorId = localStorage.getItem('alzain_visitor_id');
+    if (!pixelVisitorId) {
+      pixelVisitorId = 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+      localStorage.setItem('alzain_visitor_id', pixelVisitorId);
+    }
+    
+    // Track visit count
+    var visitCount = parseInt(localStorage.getItem('alzain_visit_count') || '0') + 1;
+    localStorage.setItem('alzain_visit_count', visitCount.toString());
+    
+    // Device and browser detection
+    var pixelDeviceInfo = {
+      userAgent: navigator.userAgent,
+      language: navigator.language,
+      platform: navigator.platform,
+      screenWidth: screen.width,
+      screenHeight: screen.height,
+      viewportWidth: window.innerWidth,
+      viewportHeight: window.innerHeight,
+      devicePixelRatio: window.devicePixelRatio || 1,
+      touchSupport: 'ontouchstart' in window,
+      cookiesEnabled: navigator.cookieEnabled,
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      referrer: document.referrer || 'direct'
+    };
+    
+    // Detect device type
+    function getDeviceType() {
+      var ua = navigator.userAgent;
+      if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) return 'tablet';
+      if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua)) return 'mobile';
+      return 'desktop';
+    }
+    pixelDeviceInfo.deviceType = getDeviceType();
+    
+    if (metaPixelId && !metaPixelDeactivated) {
+      console.log('🔵 Meta Pixel: Loading with ID:', metaPixelId);
+      console.log('🔵 Session ID:', pixelSessionId);
+      console.log('🔵 Visitor ID:', pixelVisitorId);
+      console.log('🔵 Visit #:', visitCount);
+      
+      try {
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;
+        t.onload = function() {
+          metaPixelLoaded = true;
+          console.log('✅ Meta Pixel: Script loaded successfully');
+        };
+        t.onerror = function() {
+          metaPixelError = 'Failed to load Facebook SDK';
+          console.error('❌ Meta Pixel: Failed to load script');
+        };
+        s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        
+        // Initialize with advanced matching disabled (enable when you have user data)
+        fbq('init', metaPixelId);
+        
+        // Track PageView with enhanced data
+        fbq('track', 'PageView', {
+          content_name: document.title,
+          content_category: 'furniture',
+          page_url: window.location.href,
+          referrer: document.referrer || 'direct'
+        });
+        
+        console.log('✅ Meta Pixel: Initialized and PageView tracked');
+      } catch (e) {
+        metaPixelError = e.message;
+        console.error('❌ Meta Pixel Error:', e);
+      }
+    } else if (metaPixelDeactivated) {
+      console.log('⏸️ Meta Pixel: Deactivated by user');
+    } else {
+      console.log('⚠️ Meta Pixel: No Pixel ID configured');
+    }
+    
+    // =====================================================
+    // PROFESSIONAL EVENT TRACKING FUNCTIONS
+    // =====================================================
+    
+    // Generate unique event ID for deduplication
+    function generateEventId() {
+      return 'evt_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    }
+    
+    // Log event for analytics
+    function logPixelEvent(eventName, params, eventId) {
+      var eventLog = {
+        event_id: eventId,
+        event_name: eventName,
+        timestamp: new Date().toISOString(),
+        params: params,
+        session_id: pixelSessionId,
+        visitor_id: pixelVisitorId
+      };
+      pixelEventsLog.push(eventLog);
+      
+      // Store last 50 events in localStorage for debugging
+      var storedEvents = JSON.parse(localStorage.getItem('alzain_pixel_events') || '[]');
+      storedEvents.push(eventLog);
+      if (storedEvents.length > 50) storedEvents = storedEvents.slice(-50);
+      localStorage.setItem('alzain_pixel_events', JSON.stringify(storedEvents));
+    }
+    
+    // Main tracking function with professional parameters
+    function trackPixelEvent(eventName, params) {
+      // Check if deactivated
+      if (metaPixelDeactivated) {
+        console.log('⏸️ Meta Pixel: Event skipped (deactivated):', eventName);
+        return false;
+      }
+      
+      if (typeof fbq !== 'undefined' && metaPixelId) {
+        try {
+          // Generate unique event ID for deduplication
+          var eventId = generateEventId();
+          
+          // Enrich parameters with professional data
+          var enrichedParams = Object.assign({}, params || {}, {
+            event_id: eventId,
+            event_time: Math.floor(Date.now() / 1000),
+            event_source_url: window.location.href,
+            action_source: 'website',
+            user_agent: navigator.userAgent,
+            
+            // Custom data
+            custom_data: {
+              session_id: pixelSessionId,
+              visitor_id: pixelVisitorId,
+              visit_count: visitCount,
+              device_type: pixelDeviceInfo.deviceType,
+              viewport: pixelDeviceInfo.viewportWidth + 'x' + pixelDeviceInfo.viewportHeight,
+              referrer: pixelDeviceInfo.referrer,
+              page_title: document.title,
+              timestamp_iso: new Date().toISOString()
+            }
+          });
+          
+          // Track with Facebook
+          fbq('track', eventName, enrichedParams, { eventID: eventId });
+          
+          // Log event
+          logPixelEvent(eventName, enrichedParams, eventId);
+          
+          console.log('✅ Meta Pixel Event:', eventName, enrichedParams);
+          return true;
+        } catch (e) {
+          console.error('❌ Meta Pixel Event Error:', e);
+          return false;
+        }
+      } else {
+        if (!metaPixelId) {
+          console.log('⚠️ Meta Pixel: Skipping event (no Pixel ID):', eventName);
+        }
+        return false;
+      }
+    }
+    
+    // =====================================================
+    // SPECIALIZED TRACKING FUNCTIONS
+    // =====================================================
+    
+    // Track product view with full details
+    function trackProductView(product) {
+      return trackPixelEvent('ViewContent', {
+        content_type: 'product',
+        content_name: product.name,
+        content_ids: [product.id ? product.id.toString() : product.name],
+        content_category: product.category || 'مفروشات',
+        value: parseFloat(product.price) || 0,
+        currency: 'IQD',
+        contents: [{
+          id: product.id ? product.id.toString() : product.name,
+          quantity: 1,
+          item_price: parseFloat(product.price) || 0
+        }]
+      });
+    }
+    
+    // Track add to cart / initiate checkout
+    function trackInitiateCheckout(product, quantity) {
+      quantity = quantity || 1;
+      var totalValue = (parseFloat(product.price) || 0) * quantity;
+      
+      return trackPixelEvent('InitiateCheckout', {
+        content_type: 'product',
+        content_name: product.name,
+        content_ids: [product.id ? product.id.toString() : product.name],
+        content_category: product.category || 'مفروشات',
+        value: totalValue,
+        currency: 'IQD',
+        num_items: quantity,
+        contents: [{
+          id: product.id ? product.id.toString() : product.name,
+          quantity: quantity,
+          item_price: parseFloat(product.price) || 0
+        }]
+      });
+    }
+    
+    // Track purchase with complete order data
+    function trackPurchase(order) {
+      return trackPixelEvent('Purchase', {
+        content_type: 'product',
+        content_name: order.productName,
+        content_ids: [order.productId ? order.productId.toString() : order.productName],
+        content_category: order.category || 'مفروشات',
+        value: parseFloat(order.totalPrice) || 0,
+        currency: 'IQD',
+        num_items: order.quantity || 1,
+        order_id: order.id ? order.id.toString() : generateEventId(),
+        contents: [{
+          id: order.productId ? order.productId.toString() : order.productName,
+          quantity: order.quantity || 1,
+          item_price: parseFloat(order.unitPrice || order.totalPrice) || 0
+        }]
+      });
+    }
+    
+    // Track lead submission
+    function trackLead(leadData) {
+      return trackPixelEvent('Lead', {
+        content_name: leadData.productName || 'طلب جديد',
+        content_category: leadData.category || 'مفروشات',
+        value: parseFloat(leadData.value) || 0,
+        currency: 'IQD',
+        lead_type: 'purchase_inquiry'
+      });
+    }
+    
+    // Track search
+    function trackSearch(searchQuery) {
+      return trackPixelEvent('Search', {
+        search_string: searchQuery,
+        content_category: 'مفروشات'
+      });
+    }
+    
+    // Track contact/WhatsApp click
+    function trackContact(method) {
+      return trackPixelEvent('Contact', {
+        contact_method: method || 'whatsapp',
+        content_category: 'customer_inquiry'
+      });
+    }
+    
+    // Track scroll depth
+    var scrollMilestones = { 25: false, 50: false, 75: false, 100: false };
+    function trackScrollDepth() {
+      var scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+      
+      [25, 50, 75, 100].forEach(function(milestone) {
+        if (scrollPercent >= milestone && !scrollMilestones[milestone]) {
+          scrollMilestones[milestone] = true;
+          trackPixelEvent('CustomEvent', {
+            event_name: 'scroll_depth',
+            scroll_percent: milestone,
+            content_name: document.title
+          });
+        }
+      });
+    }
+    
+    // Track time on page
+    var pageStartTime = Date.now();
+    function trackTimeOnPage() {
+      var timeSpent = Math.round((Date.now() - pageStartTime) / 1000);
+      trackPixelEvent('CustomEvent', {
+        event_name: 'time_on_page',
+        time_seconds: timeSpent,
+        content_name: document.title
+      });
+    }
+    
+    // Add scroll tracking
+    if (metaPixelId && !metaPixelDeactivated) {
+      window.addEventListener('scroll', function() {
+        clearTimeout(window.scrollTrackTimeout);
+        window.scrollTrackTimeout = setTimeout(trackScrollDepth, 100);
+      });
+      
+      // Track time on page when leaving
+      window.addEventListener('beforeunload', trackTimeOnPage);
+    }
+    
+    // =====================================================
+    // DEBUGGING AND STATUS FUNCTIONS
+    // =====================================================
+    
+    // Function to check pixel status (can be called from console)
+    function checkMetaPixelStatus() {
+      return {
+        pixelId: metaPixelId,
+        deactivated: metaPixelDeactivated,
+        loaded: metaPixelLoaded,
+        fbqAvailable: typeof fbq !== 'undefined',
+        error: metaPixelError,
+        status: metaPixelDeactivated ? 'deactivated' : (metaPixelId ? (typeof fbq !== 'undefined' ? 'active' : 'loading') : 'not_configured'),
+        sessionId: pixelSessionId,
+        visitorId: pixelVisitorId,
+        visitCount: visitCount,
+        deviceInfo: pixelDeviceInfo,
+        eventsTracked: pixelEventsLog.length,
+        recentEvents: pixelEventsLog.slice(-5)
+      };
+    }
+    
+    // Get all tracked events
+    function getPixelEvents() {
+      return JSON.parse(localStorage.getItem('alzain_pixel_events') || '[]');
+    }
+    
+    // Clear event history
+    function clearPixelEvents() {
+      localStorage.removeItem('alzain_pixel_events');
+      pixelEventsLog = [];
+      console.log('✅ Pixel events cleared');
+    }
+    
+    // Expose to window for debugging
+    window.checkMetaPixelStatus = checkMetaPixelStatus;
+    window.getPixelEvents = getPixelEvents;
+    window.clearPixelEvents = clearPixelEvents;
+    window.trackPixelEvent = trackPixelEvent;
+    window.trackProductView = trackProductView;
+    window.trackInitiateCheckout = trackInitiateCheckout;
+    window.trackPurchase = trackPurchase;
+    window.trackLead = trackLead;
+    window.trackContact = trackContact;
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none" id="metaPixelNoscript"
+         src="" />
+  </noscript>
+  <script>
+    // Set noscript image src if pixel ID exists and not deactivated
+    if (metaPixelId && !metaPixelDeactivated) {
+      document.getElementById('metaPixelNoscript').src = 'https://www.facebook.com/tr?id=' + metaPixelId + '&ev=PageView&noscript=1';
+    }
+  </script>
+  <!-- End Meta Pixel Code -->
+</head>
+<body>
+  
+  <!-- Meta Pixel Status Overlay -->
+  <div id="pixelOverlay" class="fixed bottom-4 left-4 z-50 transition-all duration-300" style="display: none;">
+    <div id="pixelOverlayContent" class="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden" style="min-width: 280px;">
+      <!-- Header -->
+      <div id="pixelOverlayHeader" class="px-4 py-3 flex items-center justify-between cursor-pointer" onclick="togglePixelOverlayDetails()">
+        <div class="flex items-center gap-3">
+          <div id="pixelStatusDot" class="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1877F2" stroke-width="2">
+            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+          </svg>
+          <span class="font-bold text-gray-900 dark:text-white text-sm">Meta Pixel</span>
+          <span id="pixelStatusText" class="text-xs px-2 py-1 rounded-full bg-green-100 text-green-800">نشط</span>
+        </div>
+        <svg id="pixelOverlayArrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-400 transition-transform">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </div>
+      
+      <!-- Details (collapsible) -->
+      <div id="pixelOverlayDetails" class="hidden border-t border-gray-200 dark:border-gray-700">
+        <div class="px-4 py-3 space-y-3">
+          <div class="text-xs text-gray-500">
+            <span class="font-bold">المعرّف:</span>
+            <code id="pixelOverlayId" class="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded mr-1"></code>
+          </div>
+          <div class="text-xs text-gray-500">
+            <span class="font-bold">الحالة:</span>
+            <span id="pixelOverlayStatusDetail" class="text-green-600">متصل ويعمل</span>
+          </div>
+          <div class="flex gap-2">
+            <button onclick="deactivatePixel()" class="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white text-xs font-bold py-2 px-3 rounded-lg transition flex items-center justify-center gap-1">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <rect x="6" y="4" width="12" height="16" rx="2"/>
+              </svg>
+              إيقاف مؤقت
+            </button>
+            <button onclick="deletePixel()" class="flex-1 bg-red-500 hover:bg-red-600 text-white text-xs font-bold py-2 px-3 rounded-lg transition flex items-center justify-center gap-1">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="3 6 5 6 21 6"/>
+                <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+              </svg>
+              حذف نهائي
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Initialize Pixel Overlay
+    function initPixelOverlay() {
+      const overlay = document.getElementById('pixelOverlay');
+      const pixelId = localStorage.getItem('alzain_meta_pixel_id');
+      const isDeactivated = localStorage.getItem('alzain_meta_pixel_deactivated') === 'true';
+      
+      if (pixelId) {
+        overlay.style.display = 'block';
+        document.getElementById('pixelOverlayId').textContent = pixelId;
+        
+        if (isDeactivated) {
+          updatePixelOverlayStatus('deactivated');
+        } else {
+          updatePixelOverlayStatus('active');
+        }
+      } else {
+        overlay.style.display = 'none';
+      }
+    }
+    
+    function updatePixelOverlayStatus(status) {
+      const dot = document.getElementById('pixelStatusDot');
+      const statusText = document.getElementById('pixelStatusText');
+      const statusDetail = document.getElementById('pixelOverlayStatusDetail');
+      
+      if (status === 'active') {
+        dot.className = 'w-3 h-3 rounded-full bg-green-500 animate-pulse';
+        statusText.className = 'text-xs px-2 py-1 rounded-full bg-green-100 text-green-800';
+        statusText.textContent = 'نشط';
+        statusDetail.className = 'text-green-600';
+        statusDetail.textContent = 'متصل ويعمل';
+      } else if (status === 'deactivated') {
+        dot.className = 'w-3 h-3 rounded-full bg-yellow-500';
+        statusText.className = 'text-xs px-2 py-1 rounded-full bg-yellow-100 text-yellow-800';
+        statusText.textContent = 'متوقف';
+        statusDetail.className = 'text-yellow-600';
+        statusDetail.textContent = 'تم الإيقاف المؤقت';
+      } else {
+        dot.className = 'w-3 h-3 rounded-full bg-gray-400';
+        statusText.className = 'text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-800';
+        statusText.textContent = 'غير مهيأ';
+        statusDetail.className = 'text-gray-600';
+        statusDetail.textContent = 'لم يتم إعداد البكسل';
+      }
+    }
+    
+    function togglePixelOverlayDetails() {
+      const details = document.getElementById('pixelOverlayDetails');
+      const arrow = document.getElementById('pixelOverlayArrow');
+      
+      if (details.classList.contains('hidden')) {
+        details.classList.remove('hidden');
+        arrow.style.transform = 'rotate(180deg)';
+      } else {
+        details.classList.add('hidden');
+        arrow.style.transform = 'rotate(0deg)';
+      }
+    }
+    
+    function deactivatePixel() {
+      const isDeactivated = localStorage.getItem('alzain_meta_pixel_deactivated') === 'true';
+      
+      if (isDeactivated) {
+        // Reactivate
+        localStorage.removeItem('alzain_meta_pixel_deactivated');
+        updatePixelOverlayStatus('active');
+        alert('تم إعادة تفعيل Meta Pixel!\nسيتم تطبيق التغييرات عند تحديث الصفحة.');
+      } else {
+        // Deactivate
+        if (confirm('هل تريد إيقاف Meta Pixel مؤقتاً؟\nلن يتم تتبع الزوار حتى إعادة التفعيل.')) {
+          localStorage.setItem('alzain_meta_pixel_deactivated', 'true');
+          updatePixelOverlayStatus('deactivated');
+          alert('تم إيقاف Meta Pixel مؤقتاً.\nاضغط "إيقاف مؤقت" مرة أخرى لإعادة التفعيل.');
+        }
+      }
+    }
+    
+    function deletePixel() {
+      if (confirm('هل تريد حذف إعدادات Meta Pixel نهائياً؟\nسيتم إزالة المعرّف وستحتاج لإعادة الإعداد من لوحة التحكم.')) {
+        localStorage.removeItem('alzain_meta_pixel_id');
+        localStorage.removeItem('alzain_meta_pixel_deactivated');
+        document.getElementById('pixelOverlay').style.display = 'none';
+        alert('تم حذف إعدادات Meta Pixel.\nيمكنك إعادة الإعداد من لوحة التحكم.');
+        location.reload();
+      }
+    }
+    
+    // Update deactivate button text based on current state
+    function updateDeactivateButton() {
+      const isDeactivated = localStorage.getItem('alzain_meta_pixel_deactivated') === 'true';
+      const buttons = document.querySelectorAll('#pixelOverlayDetails button');
+      if (buttons.length > 0) {
+        const deactivateBtn = buttons[0];
+        if (isDeactivated) {
+          deactivateBtn.innerHTML = `
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polygon points="5 3 19 12 5 21 5 3"/>
+            </svg>
+            إعادة التفعيل
+          `;
+          deactivateBtn.className = 'flex-1 bg-green-500 hover:bg-green-600 text-white text-xs font-bold py-2 px-3 rounded-lg transition flex items-center justify-center gap-1';
+        } else {
+          deactivateBtn.innerHTML = `
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <rect x="6" y="4" width="12" height="16" rx="2"/>
+            </svg>
+            إيقاف مؤقت
+          `;
+          deactivateBtn.className = 'flex-1 bg-yellow-500 hover:bg-yellow-600 text-white text-xs font-bold py-2 px-3 rounded-lg transition flex items-center justify-center gap-1';
+        }
+      }
+    }
+    
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      initPixelOverlay();
+      updateDeactivateButton();
+    });
+  </script>
+
+  <!-- Loading Screen -->
+  <div class="loading-screen" id="loadingScreen">
+    <div class="text-center">
+      <div class="loader mx-auto mb-4"></div>
+      <p class="text-2xl font-bold" style="color: var(--text-primary);">جاري التحميل...</p>
+    </div>
+  </div>
+  
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+  
+  <!-- Morphing Backgrounds -->
+  <div class="morph-bg bg-amber-300 absolute top-20 right-20 z-0"></div>
+  <div class="morph-bg bg-amber-400 absolute bottom-20 left-20 z-0" style="animation-delay: 2s;"></div>
+
+  <!-- Header -->
+  <header class="fixed top-4 right-4 left-4 z-50 glass-premium rounded-2xl mx-auto max-w-7xl">
+    <div class="px-6 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3 float-slow">
+          <div style="width: 90px; height: 90px; background: var(--logo-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 2px solid rgba(255, 193, 7, 0.25); border-radius: 18px; display: flex; align-items: center; justify-content: center; padding: 4px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 0 4px 16px rgba(255, 193, 7, 0.15);">
+            <img src="IMG/LOGO.png" alt="مصنع الزين" style="width: 100%; height: 100%; object-fit: contain;">
+          </div>
+          <div>
+            <h1 class="text-lg font-black" style="background: linear-gradient(to left, #FFC107, #FFB300); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">مصنع الزين</h1>
+            <p class="text-sm font-bold" style="color: var(--text-tertiary);">للمفروشات الراقية</p>
+          </div>
+        </div>
+        <nav class="hidden md:flex items-center gap-3">
+          <button class="glass-gold text-black font-black px-6 py-2.5 rounded-xl text-sm hover-target">الرئيسية</button>
+          <button class="glass-premium font-bold px-6 py-2.5 rounded-xl text-sm hover-target" style="color: var(--text-primary);">أحدث الموديلات</button>
+          <button class="glass-premium font-bold px-6 py-2.5 rounded-xl text-sm hover-target" style="color: var(--text-primary);">عن المصنع</button>
+          <button class="dark-mode-toggle" id="darkModeToggle" title="تبديل الوضع">
+            <svg id="lightIcon" fill="none" stroke="#FFC107" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+            </svg>
+            <svg id="darkIcon" style="display: none;" fill="none" stroke="#FFC107" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+            </svg>
+          </button>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section with Parallax -->
+  <section class="relative min-h-screen flex items-center justify-center pt-28 pb-20 overflow-hidden">
+    <div class="container mx-auto px-6 z-10 text-center">
+      <div class="parallax-layer scroll-reveal">
+        <div class="inline-flex items-center gap-3 glass-gold rounded-full px-6 py-3 mb-8 text-base font-black text-black">
+          <span class="text-xl">✨</span>
+          <span>تقنية الذكاء الاصطناعي 2026</span>
+        </div>
+      </div>
+      
+      <h1 class="text-5xl md:text-6xl lg:text-7xl font-black mb-8 leading-tight scroll-reveal" style="transition-delay: 0.1s;">
+        <span style="color: var(--text-primary);">صمم غرفتك</span><br>
+        <span style="background: linear-gradient(135deg, #FFC107 0%, #FFD54F 50%, #FFA000 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">بلمسة ذكاء واحدة</span>
+      </h1>
+      
+      <p class="text-xl mb-12 max-w-3xl mx-auto leading-relaxed font-bold scroll-reveal" style="color: var(--text-secondary); transition-delay: 0.2s;">
+        ارفع صورة غرفتك وشوف أحدث موديلات مصنع الزين في بيتك فوراً
+      </p>
+      
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 scroll-reveal" style="transition-delay: 0.3s;">
+        <button id="heroTryAiBtn" class="btn-magnetic hover-target text-black font-black text-lg px-10 py-4 rounded-xl flex items-center gap-3">
+          <span>جرب الآن مجاناً</span>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+          </svg>
+        </button>
+        
+        <button class="glass-premium hover-target font-bold text-base px-8 py-4 rounded-xl" style="color: var(--text-primary);">
+          شاهد العرض التوضيحي
+        </button>
+      </div>
+      
+      <div class="grid grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <div class="glass-premium rounded-2xl p-6 card-3d scroll-reveal" style="transition-delay: 0.4s;">
+          <div class="text-3xl font-black mb-2 counter" data-target="500" style="background: linear-gradient(to bottom, #FFC107, #FFB300); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">0</div>
+          <div class="text-sm font-bold" style="color: var(--text-secondary);">موديل حديث</div>
+        </div>
+        <div class="glass-premium rounded-2xl p-6 card-3d scroll-reveal" style="transition-delay: 0.5s;">
+          <div class="text-3xl font-black mb-2 counter" data-target="10000" style="background: linear-gradient(to bottom, #FFC107, #FFB300); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">0</div>
+          <div class="text-sm font-bold" style="color: var(--text-secondary);">عميل راضي</div>
+        </div>
+        <div class="glass-premium rounded-2xl p-6 card-3d scroll-reveal" style="transition-delay: 0.6s;">
+          <div class="text-3xl font-black mb-2 counter" data-target="25" style="background: linear-gradient(to bottom, #FFC107, #FFB300); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">0</div>
+          <div class="text-sm font-bold" style="color: var(--text-secondary);">سنة خبرة</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Premium Product Showcase -->
+  <section class="py-20 px-6">
+    <div class="container mx-auto max-w-7xl">
+      <div class="text-center mb-16 scroll-reveal">
+        <h2 class="text-4xl md:text-5xl font-black mb-4" style="color: var(--text-primary);">
+          تشكيلة <span style="background: linear-gradient(135deg, #FFC107, #FFD54F); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">مصنع الزين</span> الحصرية
+        </h2>
+        <p class="text-lg font-bold" style="color: var(--text-secondary);">موديلات فاخرة مصممة بأعلى معايير الجودة والراحة</p>
+      </div>
+      
+      <div id="productsGrid" class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <!-- Products will be loaded dynamically from localStorage -->
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Footer -->
+  <footer class="glass-premium border-t-2 border-amber-300 py-12 px-6 mt-20 mx-4 rounded-t-3xl scroll-reveal" style="border-top-width: 2px;">
+    <div class="container mx-auto max-w-6xl text-center">
+      <div class="flex items-center justify-center gap-4 mb-6 float-slow">
+        <div style="width: 110px; height: 110px; background: var(--logo-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 2.5px solid rgba(255, 193, 7, 0.3); border-radius: 20px; display: flex; align-items: center; justify-content: center; padding: 5px; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(255, 193, 7, 0.2);">
+          <img src="IMG/LOGO.png" alt="مصنع الزين" style="width: 100%; height: 100%; object-fit: contain;">
+        </div>
+        <div>
+          <h3 class="text-xl font-black" style="background: linear-gradient(to left, #FFC107, #FFB300); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">مصنع الزين</h3>
+          <p class="text-sm font-bold" style="color: var(--text-tertiary);">للمفروشات الراقية</p>
+        </div>
+      </div>
+      <p class="text-base font-bold mb-6" style="color: var(--text-secondary);">نصنع الفخامة والراحة في كل قطعة أثاث</p>
+      <p class="text-sm font-bold" style="color: var(--text-secondary);">© 2026 مصنع الزين للمفروشات. جميع الحقوق محفوظة.</p>
+      <p class="text-xs mt-3 font-bold" style="color: var(--text-tertiary);">صُنع بـ <span class="text-amber-500 text-base">♥</span> في الأردن</p>
+    </div>
+  </footer>
+
+  <!-- AI Visualization Modal - Ultra Professional -->
+  <div class="ai-modal" id="aiModal">
+    <div class="ai-modal-content">
+      <!-- Header with animated gradient -->
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-12 h-12 rounded-2xl flex items-center justify-center" style="background: linear-gradient(135deg, #8B5CF6, #EC4899);">
+              <svg class="w-6 h-6 text-white ai-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+              </svg>
+            </div>
+            <div>
+              <h2 class="text-3xl font-black" style="background: linear-gradient(135deg, #8B5CF6, #EC4899, #F97316); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                الذكاء الاصطناعي الإبداعي
+              </h2>
+            </div>
+          </div>
+          <p class="font-bold text-lg" style="color: var(--text-secondary);">حوّل غرفتك بأثاث <span style="color: #FFC107;" id="selectedProduct">الزين</span> الفاخر</p>
+        </div>
+        <button class="w-12 h-12 glass-premium rounded-full flex items-center justify-center hover:bg-red-500 hover:text-white transition-all hover:rotate-90" id="closeModal">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Step 1: Upload Photo -->
+      <div class="step-item visible mb-6" id="step1">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center text-white font-black" style="background: linear-gradient(135deg, #8B5CF6, #EC4899);">1</div>
+          <h3 class="text-xl font-black" style="color: var(--text-primary);">ارفع صورة غرفتك الحالية</h3>
+        </div>
+        <div class="upload-zone" id="uploadZone">
+          <div class="mb-6">
+            <div class="w-24 h-24 mx-auto rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.2));">
+              <svg class="w-12 h-12" style="color: #EC4899;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+            </div>
+          </div>
+          <h3 class="text-xl font-black mb-2" style="color: var(--text-primary);">اسحب الصورة هنا</h3>
+          <p class="text-sm font-bold mb-4" style="color: var(--text-secondary);">أو اضغط لاختيار صورة من جهازك</p>
+          <div class="inline-block px-6 py-3 rounded-xl font-bold text-white" style="background: linear-gradient(135deg, #8B5CF6, #EC4899);">
+            <svg class="w-5 h-5 inline-block ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+            </svg>
+            اختر صورة
+          </div>
+          <input type="file" id="fileInput" accept="image/*" style="display: none;">
+        </div>
+        <div id="imagePreviewContainer" class="mt-4" style="display: none;">
+          <div class="relative rounded-2xl overflow-hidden" style="border: 3px solid #8B5CF6;">
+            <img id="previewImg" style="max-width: 100%; display: block;">
+            <button id="removeImage" class="absolute top-3 left-3 w-10 h-10 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 transition">
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+            </button>
+            <div class="absolute bottom-3 right-3 px-4 py-2 rounded-xl text-white text-sm font-bold" style="background: linear-gradient(135deg, #8B5CF6, #EC4899);">  
+              ✓ تم رفع الصورة
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: Choose Color -->
+      <div class="step-item mb-6" id="step2" style="opacity: 0.5; pointer-events: none;">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center text-white font-black" style="background: linear-gradient(135deg, #8B5CF6, #EC4899);">2</div>
+          <h3 class="text-xl font-black" style="color: var(--text-primary);">اختر لون الأثاث المفضل</h3>
+        </div>
+        <div class="glass-premium rounded-2xl p-6">
+          <p class="text-sm font-bold mb-4" style="color: var(--text-secondary);">اختر لوناً جاهزاً أو حدد لونك الخاص</p>
+          <div class="flex flex-wrap gap-4 items-center justify-center">
+            <!-- Preset Colors -->
+            <div class="color-option selected" data-color="#8B4513" style="background: linear-gradient(135deg, #8B4513, #A0522D);" title="بني كلاسيكي"></div>
+            <div class="color-option" data-color="#2C1810" style="background: linear-gradient(135deg, #2C1810, #4A2C2A);" title="بني غامق"></div>
+            <div class="color-option" data-color="#F5DEB3" style="background: linear-gradient(135deg, #F5DEB3, #DEB887);" title="بيج"></div>
+            <div class="color-option" data-color="#FFFFFF" style="background: linear-gradient(135deg, #FFFFFF, #F0F0F0);" title="أبيض"></div>
+            <div class="color-option" data-color="#1C1C1C" style="background: linear-gradient(135deg, #1C1C1C, #333333);" title="أسود"></div>
+            <div class="color-option" data-color="#C0C0C0" style="background: linear-gradient(135deg, #C0C0C0, #A9A9A9);" title="رمادي"></div>
+            <div class="color-option" data-color="#FFD700" style="background: linear-gradient(135deg, #FFD700, #FFC107);" title="ذهبي"></div>
+            <div class="color-option" data-color="#800020" style="background: linear-gradient(135deg, #800020, #A52A2A);" title="نبيذي"></div>
+            <div class="color-option" data-color="#000080" style="background: linear-gradient(135deg, #000080, #191970);" title="كحلي"></div>
+            <div class="color-option" data-color="#228B22" style="background: linear-gradient(135deg, #228B22, #2E8B57);" title="أخضر"></div>
+            <!-- Custom Color Picker -->
+            <div class="relative">
+              <input type="color" id="customColorPicker" class="custom-color-input" value="#8B4513" title="اختر لونك الخاص">
+              <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs font-bold" style="color: var(--text-tertiary); white-space: nowrap;">لون مخصص</div>
+            </div>
+          </div>
+          <div class="mt-8 text-center">
+            <p class="text-sm font-bold" style="color: var(--text-tertiary);">اللون المختار: <span id="selectedColorName" class="font-black" style="color: #FFC107;">بني كلاسيكي</span></p>
+            <div id="selectedColorPreview" class="inline-block w-12 h-12 rounded-xl mt-2 border-4 border-white shadow-lg" style="background: #8B4513;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: Generate -->
+      <div class="step-item mb-6" id="step3" style="opacity: 0.5; pointer-events: none;">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center text-white font-black" style="background: linear-gradient(135deg, #8B5CF6, #EC4899);">3</div>
+          <h3 class="text-xl font-black" style="color: var(--text-primary);">شاهد النتيجة المذهلة</h3>
+        </div>
+        <div id="resultContainer" class="glass-premium rounded-2xl p-8 min-h-[300px] flex items-center justify-center">
+          <div class="text-center" id="resultPlaceholder">
+            <div class="w-20 h-20 mx-auto rounded-full flex items-center justify-center mb-4" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.2));">
+              <svg class="w-10 h-10" style="color: #EC4899;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              </svg>
+            </div>
+            <p class="font-bold" style="color: var(--text-secondary);">النتيجة ستظهر هنا</p>
+          </div>
+          <div id="resultImage" style="display: none;">
+            <img id="generatedImg" class="w-full rounded-xl">
+          </div>
+        </div>
+      </div>
+
+      <!-- Generate Button -->
+      <button class="w-full text-white font-black text-xl py-5 rounded-2xl flex items-center justify-center gap-4 relative overflow-hidden" id="generateBtn" style="background: linear-gradient(135deg, #8B5CF6, #EC4899, #F97316); background-size: 200% 200%; animation: ai-gradient 3s ease infinite;" disabled>
+        <span class="sparkle" style="top: 10%; right: 10%; animation-delay: 0s;"></span>
+        <span class="sparkle" style="top: 60%; right: 20%; animation-delay: 0.5s;"></span>
+        <span class="sparkle" style="top: 30%; left: 15%; animation-delay: 1s;"></span>
+        <svg class="w-8 h-8 ai-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+        </svg>
+        <span id="generateBtnText">ارفع صورة أولاً للبدء</span>
+      </button>
+
+      <!-- Info Box -->
+      <div class="mt-6 p-5 rounded-2xl text-center" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1)); border: 1px solid rgba(139, 92, 246, 0.3);">
+        <div class="flex items-center justify-center gap-3">
+          <svg class="w-6 h-6" style="color: #EC4899;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <p class="font-black" style="color: var(--text-primary);">سيتم استبدال الأثاث القديم بـ <span id="productNameInModal" style="color: #FFC107;">أثاث الزين</span> باللون المختار</p>
+        </div>
+      </div>
+
+      <!-- API Key Settings (Collapsible) -->
+      <div class="mt-4">
+        <button onclick="toggleApiKeySection()" class="w-full flex items-center justify-between p-3 rounded-xl text-sm font-bold transition-all hover:bg-gray-100 dark:hover:bg-gray-800" style="color: var(--text-secondary);">
+          <span class="flex items-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+            <span>إعدادات API</span>
+          </span>
+          <svg id="apiKeyArrow" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+        <div id="apiKeySection" class="hidden mt-3 p-4 rounded-xl" style="background: rgba(139, 92, 246, 0.05); border: 1px solid rgba(139, 92, 246, 0.2);">
+          <label class="block text-sm font-bold mb-2" style="color: var(--text-primary);">مفتاح Gemini API</label>
+          <div class="flex gap-2">
+            <input type="password" id="modalApiKey" placeholder="AIza..." class="flex-1 px-4 py-3 rounded-xl border text-sm" style="background: var(--bg-primary); border-color: rgba(139, 92, 246, 0.3); color: var(--text-primary);">
+            <button onclick="toggleModalApiKeyVisibility()" class="px-3 py-2 rounded-xl" style="background: rgba(139, 92, 246, 0.1);">
+              <svg id="modalApiKeyEye" class="w-5 h-5" style="color: #8B5CF6;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+              </svg>
+            </button>
+          </div>
+          <div class="flex gap-2 mt-3">
+            <button onclick="saveModalApiKey()" class="flex-1 px-4 py-2 rounded-xl text-white font-bold text-sm" style="background: linear-gradient(135deg, #8B5CF6, #EC4899);">
+              💾 حفظ المفتاح
+            </button>
+            <button onclick="testModalApiKey()" class="px-4 py-2 rounded-xl font-bold text-sm" style="background: rgba(16, 185, 129, 0.1); color: #10B981;">
+              🔗 اختبار
+            </button>
+          </div>
+          <div id="modalApiStatus" class="hidden mt-3 p-3 rounded-xl text-sm text-center"></div>
+          <p class="text-xs mt-3 text-center" style="color: var(--text-secondary);">
+            احصل على مفتاح مجاني من <a href="https://makersuite.google.com/app/apikey" target="_blank" class="underline" style="color: #8B5CF6;">Google AI Studio</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // AI Modal Functionality - Ultra Professional
+    const aiModal = document.getElementById('aiModal');
+    const closeModalBtn = document.getElementById('closeModal');
+    const uploadZone = document.getElementById('uploadZone');
+    const fileInput = document.getElementById('fileInput');
+    const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+    const previewImg = document.getElementById('previewImg');
+    const removeImageBtn = document.getElementById('removeImage');
+    const selectedProductName = document.getElementById('selectedProduct');
+    const productNameInModal = document.getElementById('productNameInModal');
+    const generateBtn = document.getElementById('generateBtn');
+    const generateBtnText = document.getElementById('generateBtnText');
+    
+    // Steps
+    const step1 = document.getElementById('step1');
+    const step2 = document.getElementById('step2');
+    const step3 = document.getElementById('step3');
+    
+    // Color picker elements
+    const colorOptions = document.querySelectorAll('.color-option');
+    const customColorPicker = document.getElementById('customColorPicker');
+    const selectedColorName = document.getElementById('selectedColorName');
+    const selectedColorPreview = document.getElementById('selectedColorPreview');
+    
+    // State
+    let selectedColor = '#8B4513';
+    let hasUploadedImage = false;
+    let currentProductData = null;
+    
+    // Color names mapping
+    const colorNames = {
+      '#8B4513': 'بني كلاسيكي',
+      '#2C1810': 'بني غامق',
+      '#F5DEB3': 'بيج',
+      '#FFFFFF': 'أبيض',
+      '#1C1C1C': 'أسود',
+      '#C0C0C0': 'رمادي',
+      '#FFD700': 'ذهبي',
+      '#800020': 'نبيذي',
+      '#000080': 'كحلي',
+      '#228B22': 'أخضر'
+    };
+    
+    // API Key functions for modal
+    function toggleApiKeySection() {
+      const section = document.getElementById('apiKeySection');
+      const arrow = document.getElementById('apiKeyArrow');
+      section.classList.toggle('hidden');
+      arrow.style.transform = section.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+      
+      // Load saved key
+      const savedKey = localStorage.getItem('alzain_ai_api_key');
+      if (savedKey) {
+        document.getElementById('modalApiKey').value = savedKey;
+      }
+    }
+    
+    function toggleModalApiKeyVisibility() {
+      const input = document.getElementById('modalApiKey');
+      input.type = input.type === 'password' ? 'text' : 'password';
+    }
+    
+    function saveModalApiKey() {
+      const apiKey = document.getElementById('modalApiKey').value.trim();
+      const statusDiv = document.getElementById('modalApiStatus');
+      
+      if (!apiKey) {
+        statusDiv.className = 'mt-3 p-3 rounded-xl text-sm text-center bg-red-50 text-red-700';
+        statusDiv.textContent = '❌ الرجاء إدخال مفتاح API';
+        statusDiv.classList.remove('hidden');
+        return;
+      }
+      
+      localStorage.setItem('alzain_ai_api_key', apiKey);
+      statusDiv.className = 'mt-3 p-3 rounded-xl text-sm text-center bg-green-50 text-green-700';
+      statusDiv.textContent = '✅ تم حفظ المفتاح بنجاح!';
+      statusDiv.classList.remove('hidden');
+      
+      console.log('🔑 API Key saved:', apiKey.substring(0, 10) + '...');
+    }
+    
+    async function testModalApiKey() {
+      const apiKey = document.getElementById('modalApiKey').value.trim();
+      const statusDiv = document.getElementById('modalApiStatus');
+      
+      if (!apiKey) {
+        statusDiv.className = 'mt-3 p-3 rounded-xl text-sm text-center bg-red-50 text-red-700';
+        statusDiv.textContent = '❌ الرجاء إدخال مفتاح API أولاً';
+        statusDiv.classList.remove('hidden');
+        return;
+      }
+      
+      statusDiv.className = 'mt-3 p-3 rounded-xl text-sm text-center bg-blue-50 text-blue-700';
+      statusDiv.innerHTML = '<span class="inline-block animate-spin">⏳</span> جاري الاختبار...';
+      statusDiv.classList.remove('hidden');
+      
+      try {
+        // Test with Gemini API (using gemini-pro for text generation)
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: 'قل مرحبا' }] }]
+          })
+        });
+        
+        if (response.ok) {
+          statusDiv.className = 'mt-3 p-3 rounded-xl text-sm text-center bg-green-50 text-green-700';
+          statusDiv.textContent = '✅ الاتصال ناجح! المفتاح يعمل';
+          // Auto-save on successful test
+          localStorage.setItem('alzain_ai_api_key', apiKey);
+        } else {
+          const error = await response.json().catch(() => ({}));
+          statusDiv.className = 'mt-3 p-3 rounded-xl text-sm text-center bg-red-50 text-red-700';
+          statusDiv.textContent = '❌ ' + (error.error?.message || 'المفتاح غير صالح');
+        }
+      } catch (err) {
+        statusDiv.className = 'mt-3 p-3 rounded-xl text-sm text-center bg-red-50 text-red-700';
+        statusDiv.textContent = '❌ خطأ في الاتصال: ' + err.message;
+      }
+    }
+    
+    // Open modal when clicking Try Now buttons (will be re-attached after products load)
+    function attachTryNowButtons() {
+      document.querySelectorAll('.try-now-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const productName = btn.getAttribute('data-product');
+          const productPrice = btn.getAttribute('data-price');
+          const productId = btn.getAttribute('data-product-id');
+          const productCategory = btn.getAttribute('data-category');
+          
+          currentProductData = {
+            name: productName,
+            price: productPrice,
+            id: productId,
+            category: productCategory
+          };
+          
+          selectedProductName.textContent = productName;
+          productNameInModal.textContent = productName;
+          
+          // Reset modal state
+          resetModalState();
+          
+          aiModal.classList.add('active');
+          document.body.style.overflow = 'hidden';
+          
+          // Track AI modal open
+          if (typeof trackPixelEvent === 'function') {
+            trackPixelEvent('CustomEvent', {
+              event_name: 'ai_modal_open',
+              content_name: productName,
+              content_category: productCategory
+            });
+          }
+        });
+      });
+    }
+    
+    // Reset modal state
+    function resetModalState() {
+      hasUploadedImage = false;
+      imagePreviewContainer.style.display = 'none';
+      uploadZone.style.display = 'block';
+      fileInput.value = '';
+      
+      // Reset steps
+      step2.style.opacity = '0.5';
+      step2.style.pointerEvents = 'none';
+      step3.style.opacity = '0.5';
+      step3.style.pointerEvents = 'none';
+      
+      // Reset button
+      generateBtn.disabled = true;
+      generateBtnText.textContent = 'ارفع صورة أولاً للبدء';
+      generateBtn.style.opacity = '0.7';
+      
+      // Reset color selection
+      colorOptions.forEach(opt => opt.classList.remove('selected'));
+      document.querySelector('.color-option[data-color="#8B4513"]').classList.add('selected');
+      selectedColor = '#8B4513';
+      selectedColorName.textContent = 'بني كلاسيكي';
+      selectedColorPreview.style.background = '#8B4513';
+      
+      // Reset result
+      document.getElementById('resultPlaceholder').style.display = 'block';
+      document.getElementById('resultImage').style.display = 'none';
+    }
+    
+    // Enable step 2 and 3 after image upload
+    function enableNextSteps() {
+      step2.style.opacity = '1';
+      step2.style.pointerEvents = 'auto';
+      step2.classList.add('visible');
+      
+      step3.style.opacity = '1';
+      step3.style.pointerEvents = 'auto';
+      step3.classList.add('visible');
+      
+      generateBtn.disabled = false;
+      generateBtnText.textContent = '✨ توليد التصميم بالذكاء الاصطناعي';
+      generateBtn.style.opacity = '1';
+    }
+    
+    // Close modal
+    closeModalBtn.addEventListener('click', () => {
+      aiModal.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+    
+    // Close on backdrop click
+    // Hero "Try Now" button - opens AI modal
+    const heroTryAiBtn = document.getElementById('heroTryAiBtn');
+    if (heroTryAiBtn) {
+      heroTryAiBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        // Set default product for demo
+        currentProductData = {
+          name: 'أثاث الزين الفاخر',
+          price: '500',
+          id: 'demo-product',
+          category: 'مفروشات'
+        };
+        
+        selectedProductName.textContent = 'أثاث الزين الفاخر';
+        productNameInModal.textContent = 'أثاث الزين الفاخر';
+        
+        // Reset modal state
+        resetModalState();
+        
+        // Open AI modal
+        aiModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        console.log('🚀 AI Modal opened from hero button');
+      });
+    }
+
+    aiModal.addEventListener('click', (e) => {
+      if (e.target === aiModal) {
+        aiModal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+    
+    // Upload zone click
+    uploadZone.addEventListener('click', () => {
+      fileInput.click();
+    });
+    
+    // Remove image button
+    removeImageBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      imagePreviewContainer.style.display = 'none';
+      uploadZone.style.display = 'block';
+      fileInput.value = '';
+      hasUploadedImage = false;
+      
+      // Disable steps
+      step2.style.opacity = '0.5';
+      step2.style.pointerEvents = 'none';
+      step3.style.opacity = '0.5';
+      step3.style.pointerEvents = 'none';
+      
+      generateBtn.disabled = true;
+      generateBtnText.textContent = 'ارفع صورة أولاً للبدء';
+      generateBtn.style.opacity = '0.7';
+    });
+    
+    // File input change
+    fileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          previewImg.src = event.target.result;
+          imagePreviewContainer.style.display = 'block';
+          uploadZone.style.display = 'none';
+          hasUploadedImage = true;
+          
+          // Enable next steps with animation
+          setTimeout(enableNextSteps, 300);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+    
+    // Color selection
+    colorOptions.forEach(option => {
+      option.addEventListener('click', () => {
+        colorOptions.forEach(opt => opt.classList.remove('selected'));
+        option.classList.add('selected');
+        selectedColor = option.getAttribute('data-color');
+        selectedColorName.textContent = colorNames[selectedColor] || 'لون مخصص';
+        selectedColorPreview.style.background = selectedColor;
+      });
+    });
+    
+    // Custom color picker
+    customColorPicker.addEventListener('input', (e) => {
+      selectedColor = e.target.value;
+      colorOptions.forEach(opt => opt.classList.remove('selected'));
+      selectedColorName.textContent = 'لون مخصص';
+      selectedColorPreview.style.background = selectedColor;
+    });
+    
+    // Drag and drop
+    uploadZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      uploadZone.classList.add('dragover');
+    });
+    
+    uploadZone.addEventListener('dragleave', () => {
+      uploadZone.classList.remove('dragover');
+    });
+    
+    uploadZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      uploadZone.classList.remove('dragover');
+      
+      const file = e.dataTransfer.files[0];
+      if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          previewImg.src = event.target.result;
+          imagePreviewContainer.style.display = 'block';
+          uploadZone.style.display = 'none';
+          hasUploadedImage = true;
+          setTimeout(enableNextSteps, 300);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+    
+    // =====================================================
+    // AI IMAGE PROCESSING & API INTEGRATION
+    // =====================================================
+    
+    // Image Optimization: Resize and compress before sending to API
+    async function optimizeImageForAI(base64Image, maxWidth = 1080) {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => {
+          // Calculate new dimensions
+          let width = img.width;
+          let height = img.height;
+          
+          if (width > maxWidth) {
+            height = Math.round((height * maxWidth) / width);
+            width = maxWidth;
+          }
+          
+          // Create canvas for resizing
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          
+          const ctx = canvas.getContext('2d');
+          
+          // Use high-quality image smoothing
+          ctx.imageSmoothingEnabled = true;
+          ctx.imageSmoothingQuality = 'high';
+          
+          // Draw resized image
+          ctx.drawImage(img, 0, 0, width, height);
+          
+          // Convert to optimized base64 (JPEG for better compression)
+          const optimizedBase64 = canvas.toDataURL('image/jpeg', 0.85);
+          
+          resolve({
+            base64: optimizedBase64,
+            width: width,
+            height: height,
+            originalWidth: img.width,
+            originalHeight: img.height,
+            sizeReduction: Math.round((1 - (optimizedBase64.length / base64Image.length)) * 100)
+          });
+        };
+        
+        img.onerror = () => reject(new Error('فشل في تحميل الصورة'));
+        img.src = base64Image;
+      });
+    }
+    
+    // Extract pure base64 data (remove data URL prefix)
+    function extractBase64Data(dataUrl) {
+      const base64Match = dataUrl.match(/^data:image\/[a-z]+;base64,(.+)$/i);
+      return base64Match ? base64Match[1] : dataUrl;
+    }
+    
+    // Generate the AI Master Prompt dynamically
+    function generateAIPrompt(productName, productCategory, selectedColor, colorName) {
+      return `Role: Expert AI Interior Architect & Image Manipulation Specialist.
+
+Context: You are integrated into the "Alzain Furniture Factory" (مصنع الزين للمفروشات) e-commerce platform. Your task is to provide a "Virtual Try-On" experience for customers in Iraq and the Middle East.
+
+Product Details:
+- Product Name: ${productName}
+- Product Category: ${productCategory}
+- Selected Color: ${colorName} (HEX: ${selectedColor})
+
+Task Instructions:
+
+1. Scene Analysis: 
+   - Analyze the uploaded "User Room Image" carefully
+   - Identify the floor plane and perspective vanishing points
+   - Detect existing furniture that should be replaced
+   - Map all primary light sources (windows, lamps, ambient lighting)
+   - Note the room's color palette and overall aesthetic
+
+2. Furniture Integration:
+   - Replace the main furniture piece in the user's photo with the "${productName}" from Alzain Furniture
+   - Apply the selected color "${colorName}" (${selectedColor}) to the furniture fabric/material
+   - Maintain the furniture's design language and premium quality appearance
+
+3. Precision Requirements:
+   - COLOR FIDELITY: Apply the exact HEX color ${selectedColor} to the furniture. Maintain realistic fabric/leather texture
+   - PERSPECTIVE ALIGNMENT: Use the room's vanishing points to correctly scale and angle the furniture. It must appear to be physically resting on the floor, not floating
+   - SHADOW RENDERING: Create realistic "Contact Shadows" where furniture meets the floor. Generate "Occlusion Shadows" based on the detected light direction
+   - SEAMLESS REPLACEMENT: Mask out old furniture cleanly and reconstruct the background using the room's existing textures (wall, floor, carpet)
+
+4. Quality Standards:
+   - Output must be photorealistic and high-fidelity
+   - The result should convince the customer that this exact furniture belongs in their home
+   - Preserve the room's original lighting mood and atmosphere
+   - Ensure the furniture scale is appropriate for the room size
+
+5. Output Format:
+   - Generate a single high-quality image
+   - Maintain the original image resolution
+   - The furniture should be the focal point of the composition
+
+Remember: This is for the Alzain Furniture premium brand. The output must reflect luxury and quality.`;
+    }
+    
+    // Call AI API for furniture visualization
+    async function callFurnitureAI(roomImageBase64, productImageUrl, productName, productCategory, selectedColor, colorName) {
+      const apiKey = localStorage.getItem('alzain_ai_api_key');
+      
+      if (!apiKey) {
+        throw new Error('لم يتم تكوين مفتاح API. يرجى الاتصال بالإدارة.');
+      }
+      
+      // Optimize the room image
+      const optimizedRoom = await optimizeImageForAI(roomImageBase64, 1080);
+      console.log(`🖼️ Room image optimized: ${optimizedRoom.originalWidth}x${optimizedRoom.originalHeight} → ${optimizedRoom.width}x${optimizedRoom.height} (${optimizedRoom.sizeReduction}% smaller)`);
+      
+      // Generate the master prompt
+      const masterPrompt = generateAIPrompt(productName, productCategory, selectedColor, colorName);
+      
+      // Prepare the API request (OpenAI GPT-4 Vision / DALL-E 3 format)
+      // This can be adapted for other providers like Stability AI, Replicate, etc.
+      const requestBody = {
+        model: "gpt-4-vision-preview", // or "dall-e-3" for image generation
+        messages: [
+          {
+            role: "system",
+            content: "You are an expert AI interior designer specializing in furniture visualization and photorealistic image manipulation."
+          },
+          {
+            role: "user",
+            content: [
+              {
+                type: "text",
+                text: masterPrompt
+              },
+              {
+                type: "image_url",
+                image_url: {
+                  url: optimizedRoom.base64,
+                  detail: "high"
+                }
+              }
+            ]
+          }
+        ],
+        max_tokens: 4096
+      };
+      
+      try {
+        const response = await fetch('https://api.openai.com/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${apiKey}`
+          },
+          body: JSON.stringify(requestBody)
+        });
+        
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({}));
+          throw new Error(errorData.error?.message || `API Error: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        return {
+          success: true,
+          result: data,
+          optimizationInfo: optimizedRoom
+        };
+      } catch (error) {
+        console.error('AI API Error:', error);
+        throw error;
+      }
+    }
+    
+    // Alternative: Call Stability AI for image-to-image generation
+    async function callStabilityAI(roomImageBase64, productName, selectedColor, colorName) {
+      const apiKey = localStorage.getItem('alzain_ai_api_key');
+      
+      if (!apiKey) {
+        throw new Error('لم يتم تكوين مفتاح API');
+      }
+      
+      const optimizedRoom = await optimizeImageForAI(roomImageBase64, 1024);
+      const base64Data = extractBase64Data(optimizedRoom.base64);
+      
+      const prompt = `Professional interior design photo, ${productName} furniture in ${colorName} color (${selectedColor}), luxury Arabic furniture style, photorealistic, high quality, perfect lighting, seamless integration`;
+      
+      const formData = new FormData();
+      
+      // Convert base64 to blob
+      const byteCharacters = atob(base64Data);
+      const byteNumbers = new Array(byteCharacters.length);
+      for (let i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+      }
+      const byteArray = new Uint8Array(byteNumbers);
+      const blob = new Blob([byteArray], { type: 'image/jpeg' });
+      
+      formData.append('init_image', blob, 'room.jpg');
+      formData.append('init_image_mode', 'IMAGE_STRENGTH');
+      formData.append('image_strength', '0.35');
+      formData.append('text_prompts[0][text]', prompt);
+      formData.append('text_prompts[0][weight]', '1');
+      formData.append('cfg_scale', '7');
+      formData.append('samples', '1');
+      formData.append('steps', '30');
+      
+      const response = await fetch('https://api.stability.ai/v1/generation/stable-diffusion-xl-1024-v1-0/image-to-image', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${apiKey}`,
+          'Accept': 'application/json'
+        },
+        body: formData
+      });
+      
+      if (!response.ok) {
+        const error = await response.json().catch(() => ({}));
+        throw new Error(error.message || `Stability AI Error: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      
+      if (data.artifacts && data.artifacts[0]) {
+        return {
+          success: true,
+          imageBase64: `data:image/png;base64,${data.artifacts[0].base64}`,
+          optimizationInfo: optimizedRoom
+        };
+      }
+      
+      throw new Error('لم يتم إرجاع صورة من الخدمة');
+    }
+    
+    // =============================================
+    // 🔐 SECURITY: Rate Limiting for AI Requests
+    // =============================================
+    const aiRateLimiter = {
+      requests: [],
+      maxRequests: 10,  // 10 requests
+      windowMs: 3600000, // per hour
+      
+      canMakeRequest: function() {
+        const now = Date.now();
+        this.requests = this.requests.filter(t => now - t < this.windowMs);
+        return this.requests.length < this.maxRequests;
+      },
+      
+      recordRequest: function() {
+        this.requests.push(Date.now());
+        localStorage.setItem('alzain_ai_requests', JSON.stringify(this.requests));
+      },
+      
+      getRemainingRequests: function() {
+        const now = Date.now();
+        this.requests = this.requests.filter(t => now - t < this.windowMs);
+        return this.maxRequests - this.requests.length;
+      },
+      
+      getTimeUntilReset: function() {
+        if (this.requests.length === 0) return 0;
+        const oldest = Math.min(...this.requests);
+        return Math.max(0, this.windowMs - (Date.now() - oldest));
+      },
+      
+      init: function() {
+        try {
+          const stored = localStorage.getItem('alzain_ai_requests');
+          if (stored) {
+            this.requests = JSON.parse(stored).filter(t => Date.now() - t < this.windowMs);
+          }
+        } catch (e) {}
+      }
+    };
+    aiRateLimiter.init();
+    
+    // 🔐 SECURITY: Input Validation for Images
+    function validateImageForAI(imageBase64) {
+      const errors = [];
+      
+      if (!imageBase64 || typeof imageBase64 !== 'string') {
+        errors.push('الصورة غير صالحة');
+        return { valid: false, errors };
+      }
+      
+      if (!imageBase64.startsWith('data:image/')) {
+        errors.push('نوع الملف غير مدعوم');
+        return { valid: false, errors };
+      }
+      
+      // Check size (base64 is ~4/3 of original, limit to 10MB original)
+      const base64Size = imageBase64.length * 0.75;
+      const maxSize = 10 * 1024 * 1024;
+      if (base64Size > maxSize) {
+        errors.push('حجم الصورة كبير جداً (الحد الأقصى 10MB)');
+        return { valid: false, errors };
+      }
+      
+      const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+      const typeMatch = imageBase64.match(/data:([^;]+);/);
+      if (typeMatch && !allowedTypes.includes(typeMatch[1])) {
+        errors.push('نوع الصورة غير مدعوم. استخدم JPEG أو PNG');
+        return { valid: false, errors };
+      }
+      
+      return { valid: true, errors: [] };
+    }
+    
+    // 🔐 SECURITY: Mask API Key in logs
+    function maskApiKey(key) {
+      if (!key || key.length < 10) return '****';
+      return key.substring(0, 6) + '****' + key.substring(key.length - 4);
+    }
+    
+    // 🔐 SECURITY: Sanitize user input
+    function sanitizeInput(str) {
+      if (!str) return '';
+      return str.replace(/[<>&"']/g, char => ({
+        '<': '&lt;',
+        '>': '&gt;',
+        '&': '&amp;',
+        '"': '&quot;',
+        "'": '&#039;'
+      }[char]));
+    }
+    
+    // Call Google Gemini API for image analysis and furniture visualization
+    async function callGeminiAI(roomImageBase64, productName, productCategory, selectedColor, colorName) {
+      // 🔐 SECURITY: Rate limiting check
+      if (!aiRateLimiter.canMakeRequest()) {
+        const waitTime = Math.ceil(aiRateLimiter.getTimeUntilReset() / 60000);
+        throw new Error(`تم تجاوز الحد المسموح للطلبات. يرجى الانتظار ${waitTime} دقيقة.`);
+      }
+      
+      // 🔐 SECURITY: Validate image
+      const validation = validateImageForAI(roomImageBase64);
+      if (!validation.valid) {
+        throw new Error(validation.errors[0]);
+      }
+      
+      const apiKey = localStorage.getItem('alzain_ai_api_key');
+      // 🔐 SECURITY: Mask API key in console logs
+      console.log('🔑 Gemini API Key present:', apiKey ? 'YES (' + maskApiKey(apiKey) + ')' : 'NO');
+      
+      if (!apiKey) {
+        throw new Error('لم يتم تكوين مفتاح API');
+      }
+      
+      console.log('📷 Optimizing image for Gemini...');
+      const optimizedRoom = await optimizeImageForAI(roomImageBase64, 1024);
+      const base64Data = extractBase64Data(optimizedRoom.base64);
+      console.log('✅ Image optimized, base64 length:', base64Data.length);
+      
+      // Generate the master prompt for Gemini
+      const masterPrompt = `أنت خبير في التصميم الداخلي والتعديل على الصور. مهمتك هي تحليل صورة الغرفة المرفقة وتقديم وصف تفصيلي لكيفية دمج أثاث "${productName}" من مصنع الزين للمفروشات باللون "${colorName}" (${selectedColor}).
+
+تحليل الصورة:
+1. صف الغرفة: الأبعاد، الإضاءة، الألوان الموجودة
+2. حدد موقع الأثاث الحالي الذي يمكن استبداله
+3. اقترح أفضل موقع لوضع "${productName}"
+4. صف كيف سيبدو الأثاث الجديد باللون ${colorName} في هذه الغرفة
+5. اقترح ألوان مكملة للتنسيق
+
+الناتج المطلوب:
+- وصف تفصيلي للتصميم المقترح
+- نصائح للعميل حول التنسيق
+- تقييم مدى ملاءمة القطعة للغرفة (من 1-10)`;
+
+      const requestBody = {
+        contents: [{
+          parts: [
+            { text: masterPrompt },
+            {
+              inline_data: {
+                mime_type: "image/jpeg",
+                data: base64Data
+              }
+            }
+          ]
+        }],
+        generationConfig: {
+          temperature: 0.7,
+          topK: 40,
+          topP: 0.95,
+          maxOutputTokens: 2048
+        }
+      };
+      
+      // Use Gemini Pro Vision for image analysis (Free Tier stable model)
+      console.log('📡 Calling Gemini API...');
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro-vision:generateContent?key=${apiKey}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestBody)
+      });
+      
+      console.log('📨 Gemini Response status:', response.status);
+      
+      if (!response.ok) {
+        const error = await response.json().catch(() => ({}));
+        console.error('❌ Gemini API Error:', error);
+        throw new Error(error.error?.message || `Gemini API Error: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      console.log('✅ Gemini API Response received');
+      
+      // 🔐 SECURITY: Record successful request for rate limiting
+      aiRateLimiter.recordRequest();
+      
+      if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
+        console.log('📝 Got text response from Gemini');
+        return {
+          success: true,
+          analysisText: data.candidates[0].content.parts[0].text,
+          optimizationInfo: optimizedRoom,
+          provider: 'Gemini'
+        };
+      }
+      
+      console.error('❌ Unexpected Gemini response format');
+      throw new Error('لم يتم الحصول على رد من Gemini');
+    }
+    
+    // Detect API provider from key format
+    function detectApiProvider(apiKey) {
+      if (!apiKey) return 'none';
+      if (apiKey.startsWith('AIza')) return 'gemini';
+      if (apiKey.startsWith('sk-')) return 'openai';
+      if (apiKey.length > 30) return 'stability';
+      return 'unknown';
+    }
+    
+    // Main AI Generation function with fallback
+    async function generateAIFurnitureVisualization() {
+      const roomImage = previewImg.src;
+      const productName = sanitizeInput(currentProductData?.name || 'أثاث الزين');
+      const productCategory = sanitizeInput(currentProductData?.collection || 'مفروشات');
+      const productImage = currentProductData?.images?.[0] || '';
+      const apiKey = localStorage.getItem('alzain_ai_api_key');
+      const provider = detectApiProvider(apiKey);
+      
+      // 🔐 SECURITY: Show remaining requests
+      console.log(`📊 Remaining AI requests: ${aiRateLimiter.getRemainingRequests()}/${aiRateLimiter.maxRequests}`);
+      console.log(`🤖 Using AI provider: ${provider}`);
+      console.log(`🔑 API Key: ${apiKey ? maskApiKey(apiKey) : 'NONE'}`);
+      
+      try {
+        // Try based on detected provider
+        if (provider === 'gemini') {
+          console.log('📞 Calling Gemini AI...');
+          const result = await callGeminiAI(roomImage, productName, productCategory, selectedColor, selectedColorName.textContent);
+          console.log('📥 Gemini returned:', result ? 'success' : 'null');
+          return result;
+        } else if (provider === 'stability') {
+          const result = await callStabilityAI(roomImage, productName, selectedColor, selectedColorName.textContent);
+          return result;
+        } else if (provider === 'openai') {
+          const result = await callFurnitureAI(roomImage, productImage, productName, productCategory, selectedColor, selectedColorName.textContent);
+          return result;
+        } else {
+          throw new Error('لم يتم التعرف على نوع API');
+        }
+      } catch (apiError) {
+        console.warn('AI API failed:', apiError.message);
+        
+        // Fallback to simulation mode
+        return {
+          success: false,
+          simulated: true,
+          error: apiError.message
+        };
+      }
+    }
+    
+    // Generate button - AI Processing
+    generateBtn.addEventListener('click', async () => {
+      if (!hasUploadedImage) {
+        return;
+      }
+      
+      const apiKey = localStorage.getItem('alzain_ai_api_key');
+      const productName = currentProductData?.name || 'أثاث الزين';
+      const productCategory = currentProductData?.collection || 'مفروشات';
+      const colorName = selectedColorName.textContent;
+      
+      // Show processing state
+      generateBtn.disabled = true;
+      generateBtn.classList.add('ai-processing');
+      
+      // Progress stages
+      const stages = [
+        { text: '🔍 تحليل صورة الغرفة...', duration: 1500 },
+        { text: '📐 حساب الأبعاد والمنظور...', duration: 2000 },
+        { text: '🎨 تطبيق اللون المختار...', duration: 1500 },
+        { text: '✨ إنشاء الظلال والإضاءة...', duration: 2000 },
+        { text: '🖼️ توليد النتيجة النهائية...', duration: 2500 }
+      ];
+      
+      let stageIndex = 0;
+      generateBtnText.innerHTML = `<span class="inline-block animate-spin ml-2">⚡</span> ${stages[0].text}`;
+      
+      // Update progress stages
+      const updateStage = () => {
+        if (stageIndex < stages.length - 1) {
+          stageIndex++;
+          generateBtnText.innerHTML = `<span class="inline-block animate-spin ml-2">⚡</span> ${stages[stageIndex].text}`;
+        }
+      };
+      
+      // Start stage updates
+      let stageTimer = setInterval(updateStage, 2000);
+      
+      try {
+        let resultImage = null;
+        let isSimulated = false;
+        let aiErrorMessage = null;
+        
+        // Try real AI if API key exists
+        if (apiKey && apiKey.length > 10) {
+          generateBtnText.innerHTML = '<span class="inline-block animate-spin ml-2">⚡</span> 🔗 الاتصال بخدمة AI...';
+          console.log('🔑 API Key found:', apiKey.substring(0, 10) + '...');
+          
+          try {
+            console.log('🚀 Starting AI generation...');
+            const result = await generateAIFurnitureVisualization();
+            console.log('📥 AI Result:', result);
+            
+            if (result.success && result.imageBase64) {
+              resultImage = result.imageBase64;
+              isSimulated = false; // Explicitly set false for real AI result
+              console.log('✅ AI Image Generation successful!', result.optimizationInfo);
+            } else if (result.success && result.analysisText) {
+              // Gemini text analysis result
+              resultImage = null;
+              isSimulated = false; // Explicitly set false for Gemini success
+              window.geminiAnalysis = result.analysisText;
+              console.log('✅ Gemini Analysis successful! isSimulated:', isSimulated);
+              console.log('📝 Analysis text length:', result.analysisText.length);
+            } else {
+              isSimulated = true;
+              window.geminiAnalysis = null;
+              aiErrorMessage = result.error || 'Unknown error';
+              console.log('⚠️ AI returned simulated result:', aiErrorMessage);
+            }
+          } catch (aiError) {
+            console.error('❌ AI Error:', aiError.message, aiError);
+            isSimulated = true;
+            window.geminiAnalysis = null;
+            aiErrorMessage = aiError.message;
+          }
+        } else {
+          isSimulated = true;
+          aiErrorMessage = 'لم يتم إدخال مفتاح API';
+          console.log('ℹ️ No API key configured, using simulation mode');
+        }
+        
+        clearInterval(stageTimer);
+        
+        // Log the final state for debugging
+        console.log('🎯 Final state - isSimulated:', isSimulated, '| geminiAnalysis:', window.geminiAnalysis ? 'YES' : 'NO', '| resultImage:', resultImage ? 'YES' : 'NO');
+        
+        // Show result
+        generateBtn.classList.remove('ai-processing');
+        generateBtn.disabled = false;
+        generateBtnText.textContent = '✅ تم التوليد - جرب مرة أخرى';
+        
+        document.getElementById('resultPlaceholder').style.display = 'none';
+        document.getElementById('resultImage').style.display = 'block';
+        
+        const resultContainer = document.getElementById('resultContainer');
+        
+        if (resultImage && !isSimulated) {
+          // Real AI image result (Stability AI / OpenAI)
+          resultContainer.innerHTML = `
+            <div class="text-center">
+              <div class="relative rounded-2xl overflow-hidden mb-4" style="border: 3px solid #10B981;">
+                <img src="${resultImage}" style="max-width: 100%; display: block;">
+                <div class="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-bold text-white" style="background: linear-gradient(135deg, #10B981, #059669);">
+                  ✨ AI Generated
+                </div>
+              </div>
+              <div class="flex items-center justify-center gap-2 mb-3">
+                <div class="w-6 h-6 rounded-full border-2 border-white shadow" style="background: ${selectedColor};"></div>
+                <span class="font-bold">${productName}</span>
+                <span class="text-gray-500">باللون ${colorName}</span>
+              </div>
+              <p class="text-sm font-bold text-green-600 mb-4">✅ تم توليد الصورة بنجاح باستخدام الذكاء الاصطناعي</p>
+              <div class="flex gap-3 justify-center">
+                <button onclick="downloadAIResult('${resultImage}')" class="px-6 py-3 rounded-xl text-white font-black" style="background: linear-gradient(135deg, #3B82F6, #1D4ED8);">
+                  <svg class="w-5 h-5 inline-block ml-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  تحميل الصورة
+                </button>
+                <button onclick="location.href='https://wa.me/962777123456?text=أريد ${encodeURIComponent(productName)} باللون ${encodeURIComponent(colorName)} - رأيت التصميم على موقعكم'" class="px-6 py-3 rounded-xl text-white font-black" style="background: linear-gradient(135deg, #25D366, #128C7E);">
+                  <svg class="w-5 h-5 inline-block ml-2" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                  اطلب الآن
+                </button>
+              </div>
+            </div>
+          `;
+        } else if (window.geminiAnalysis && !isSimulated) {
+          // Gemini text analysis result
+          const analysisHtml = window.geminiAnalysis.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+          resultContainer.innerHTML = `
+            <div class="text-center">
+              <div class="relative rounded-2xl overflow-hidden mb-4" style="border: 3px solid #4285F4;">
+                <img src="${previewImg.src}" style="max-width: 100%; display: block;">
+                <div class="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-bold text-white" style="background: linear-gradient(135deg, #4285F4, #EA4335, #FBBC05, #34A853);">
+                  🤖 Gemini AI
+                </div>
+              </div>
+              <div class="flex items-center justify-center gap-2 mb-3">
+                <div class="w-6 h-6 rounded-full border-2 border-white shadow" style="background: ${selectedColor};"></div>
+                <span class="font-bold">${productName}</span>
+                <span class="text-gray-500">باللون ${colorName}</span>
+              </div>
+              <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-4 text-right max-h-64 overflow-y-auto">
+                <h4 class="font-bold text-blue-800 mb-2 flex items-center gap-2 justify-end">
+                  <span>تحليل Gemini AI للغرفة</span>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4285F4" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                </h4>
+                <p class="text-sm text-gray-700 leading-relaxed">${analysisHtml}</p>
+              </div>
+              <p class="text-sm font-bold text-green-600 mb-4">✅ تم تحليل الغرفة بنجاح باستخدام Gemini AI</p>
+              <div class="flex gap-3 justify-center flex-wrap">
+                <button onclick="copyGeminiAnalysis()" class="px-6 py-3 rounded-xl text-white font-black" style="background: linear-gradient(135deg, #4285F4, #1967D2);">
+                  <svg class="w-5 h-5 inline-block ml-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                  نسخ التحليل
+                </button>
+                <button onclick="location.href='https://wa.me/962777123456?text=مرحباً، أريد ${encodeURIComponent(productName)} باللون ${encodeURIComponent(colorName)}. حصلت على تحليل AI لغرفتي!'" class="px-6 py-3 rounded-xl text-white font-black" style="background: linear-gradient(135deg, #25D366, #128C7E);">
+                  <svg class="w-5 h-5 inline-block ml-2" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                  اطلب الآن
+                </button>
+              </div>
+            </div>
+          `;
+          window.geminiAnalysis = null; // Clear after use
+        } else {
+          // Simulated result (no API key or API failed)
+          const errorInfo = aiErrorMessage ? `<p class="text-xs text-red-600 mt-2">❌ السبب: ${aiErrorMessage}</p>` : '';
+          resultContainer.innerHTML = `
+            <div class="text-center">
+              <div class="relative rounded-2xl overflow-hidden mb-4" style="border: 3px solid #8B5CF6;">
+                <img src="${previewImg.src}" style="max-width: 100%; display: block; filter: brightness(0.95);">
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <div class="px-8 py-4 rounded-2xl text-white text-center" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.9), rgba(236, 72, 153, 0.9));">
+                    <p class="text-2xl font-black mb-2">🪑 ${productName}</p>
+                    <p class="text-sm">باللون: ${colorName}</p>
+                    <div class="inline-block w-8 h-8 rounded-full mt-2 border-2 border-white" style="background: ${selectedColor};"></div>
+                  </div>
+                </div>
+                <div class="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-bold text-white" style="background: linear-gradient(135deg, #F59E0B, #D97706);">
+                  🎭 وضع المعاينة
+                </div>
+              </div>
+              <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-4">
+                <p class="text-sm font-bold text-amber-800">
+                  <svg class="w-5 h-5 inline-block ml-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                  هذا عرض تجريبي - للحصول على نتيجة واقعية، يرجى التواصل معنا أو تأكد من إعداد API في لوحة التحكم
+                </p>
+                ${errorInfo}
+              </div>
+              <button onclick="location.href='https://wa.me/962777123456?text=أريد معاينة ${encodeURIComponent(productName)} باللون ${encodeURIComponent(colorName)} في غرفتي'" class="px-8 py-3 rounded-xl text-white font-black" style="background: linear-gradient(135deg, #25D366, #128C7E);">
+                <svg class="w-5 h-5 inline-block ml-2" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                تواصل معنا على واتساب
+              </button>
+            </div>
+          `;
+        }
+        
+        // Track AI generation
+        if (typeof trackPixelEvent === 'function') {
+          trackPixelEvent('CustomEvent', {
+            event_name: 'ai_design_generated',
+            content_name: productName,
+            color_selected: selectedColor,
+            color_name: colorName,
+            is_simulated: isSimulated
+          });
+        }
+        
+        // Log AI attempt for admin analytics
+        try {
+          const attempts = JSON.parse(localStorage.getItem('alzain_ai_attempts') || '[]');
+          attempts.push({
+            timestamp: new Date().toISOString(),
+            productId: currentProductData?.id || null,
+            productName: productName,
+            color: selectedColor,
+            colorName: colorName,
+            visitorId: localStorage.getItem('alzain_visitor_id') || 'anonymous',
+            sessionId: sessionStorage.getItem('alzain_session_id') || 'unknown',
+            isSimulated: isSimulated,
+            success: !isSimulated
+          });
+          localStorage.setItem('alzain_ai_attempts', JSON.stringify(attempts));
+        } catch (e) {
+          console.error('Error logging AI attempt:', e);
+        }
+        
+      } catch (error) {
+        clearInterval(stageTimer);
+        console.error('Generation error:', error);
+        
+        generateBtn.classList.remove('ai-processing');
+        generateBtn.disabled = false;
+        generateBtnText.textContent = '❌ حدث خطأ - حاول مرة أخرى';
+        
+        // Show error in result container
+        const resultContainer = document.getElementById('resultContainer');
+        resultContainer.innerHTML = `
+          <div class="text-center py-8">
+            <div class="text-6xl mb-4">😕</div>
+            <p class="text-lg font-bold text-red-600 mb-2">حدث خطأ أثناء المعالجة</p>
+            <p class="text-sm text-gray-500 mb-4">${error.message || 'يرجى المحاولة مرة أخرى'}</p>
+            <button onclick="location.reload()" class="px-6 py-3 rounded-xl text-white font-bold" style="background: linear-gradient(135deg, #8B5CF6, #EC4899);">
+              إعادة المحاولة
+            </button>
+          </div>
+        `;
+      }
+    });
+    
+    // Download AI result
+    function downloadAIResult(imageData) {
+      const link = document.createElement('a');
+      link.href = imageData;
+      link.download = `alzain-design-${Date.now()}.png`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+    
+    // Copy Gemini analysis to clipboard
+    function copyGeminiAnalysis() {
+      const analysis = window.geminiAnalysis || document.querySelector('.bg-blue-50 p.text-sm')?.innerText || '';
+      if (analysis) {
+        navigator.clipboard.writeText(analysis).then(() => {
+          // Show success feedback
+          const btn = event.target.closest('button');
+          const originalHTML = btn.innerHTML;
+          btn.innerHTML = '✅ تم النسخ!';
+          btn.style.background = 'linear-gradient(135deg, #10B981, #059669)';
+          setTimeout(() => {
+            btn.innerHTML = originalHTML;
+            btn.style.background = 'linear-gradient(135deg, #4285F4, #1967D2)';
+          }, 2000);
+        }).catch(err => {
+          console.error('Failed to copy:', err);
+          alert('فشل النسخ - حاول تحديد النص يدوياً');
+        });
+      }
+    }
+    
+    // Dark Mode Toggle
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const lightIcon = document.getElementById('lightIcon');
+    const darkIcon = document.getElementById('darkIcon');
+    const body = document.body;
+    
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      body.classList.add('dark-mode');
+      lightIcon.style.display = 'none';
+      darkIcon.style.display = 'block';
+    }
+    
+    darkModeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      
+      if (body.classList.contains('dark-mode')) {
+        lightIcon.style.display = 'none';
+        darkIcon.style.display = 'block';
+        localStorage.setItem('theme', 'dark');
+      } else {
+        lightIcon.style.display = 'block';
+        darkIcon.style.display = 'none';
+        localStorage.setItem('theme', 'light');
+      }
+    });
+    
+    // Loading Screen
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('loadingScreen').classList.add('hidden');
+      }, 1500);
+    });
+
+    // Scroll Progress
+    window.addEventListener('scroll', () => {
+      const scrollProgress = document.getElementById('scrollProgress');
+      const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+      scrollProgress.style.width = scrolled + '%';
+    });
+
+    // Scroll Reveal
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          
+          // Animate counters
+          if (entry.target.classList.contains('counter')) {
+            animateCounter(entry.target);
+          }
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.scroll-reveal, .counter').forEach(el => observer.observe(el));
+
+    // Counter Animation
+    function animateCounter(element) {
+      const target = parseInt(element.getAttribute('data-target'));
+      const duration = 2000;
+      const increment = target / (duration / 16);
+      let current = 0;
+
+      const updateCounter = () => {
+        current += increment;
+        if (current < target) {
+          element.textContent = Math.floor(current).toLocaleString('ar-EG');
+          requestAnimationFrame(updateCounter);
+        } else {
+          element.textContent = target.toLocaleString('ar-EG');
+        }
+      };
+      updateCounter();
+    }
+
+    // 3D Card Tilt Effect - Ultra Responsive to Mouse
+    document.querySelectorAll('.card-3d').forEach(card => {
+      // Add will-change for better performance
+      card.style.willChange = 'transform';
+      card.style.transition = 'transform 0.1s ease-out';
+      
+      card.addEventListener('mouseenter', () => {
+        card.style.transition = 'transform 0.1s ease-out';
+      });
+      
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        // Normalized position (-1 to 1)
+        const normalizedX = (x - centerX) / centerX;
+        const normalizedY = (y - centerY) / centerY;
+        
+        // Enhanced rotation for better responsiveness
+        const rotateX = -normalizedY * 20;
+        const rotateY = normalizedX * 20;
+        
+        // Apply transform immediately for instant response
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        card.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+      });
+      
+      // Touch support for mobile
+      card.addEventListener('touchstart', () => {
+        card.style.transition = 'transform 0.1s ease-out';
+      });
+      
+      card.addEventListener('touchmove', (e) => {
+        if (e.touches.length === 1) {
+          const touch = e.touches[0];
+          const rect = card.getBoundingClientRect();
+          const x = touch.clientX - rect.left;
+          const y = touch.clientY - rect.top;
+          
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          
+          const normalizedX = (x - centerX) / centerX;
+          const normalizedY = (y - centerY) / centerY;
+          
+          const rotateX = -normalizedY * 20;
+          const rotateY = normalizedX * 20;
+          
+          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+        }
+      });
+      
+      card.addEventListener('touchend', () => {
+        card.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+      });
+    });
+
+    // Magnetic Buttons
+    document.querySelectorAll('.btn-magnetic').forEach(btn => {
+      btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        
+        btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+      });
+      
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = 'translate(0, 0)';
+      });
+    });
+
+    // Ripple Effect
+    document.querySelectorAll('button').forEach(button => {
+      button.addEventListener('click', function(e) {
+        const ripple = document.createElement('span');
+        ripple.classList.add('ripple');
+        
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = e.clientX - rect.left - size / 2 + 'px';
+        ripple.style.top = e.clientY - rect.top - size / 2 + 'px';
+        
+        this.appendChild(ripple);
+        
+        setTimeout(() => ripple.remove(), 600);
+      });
+    });
+
+    // Before/After Slider
+    const slider = document.getElementById('slider');
+    const beforeImage = document.getElementById('beforeImage');
+    let isDragging = false;
+
+    slider.addEventListener('mousedown', () => isDragging = true);
+    document.addEventListener('mouseup', () => isDragging = false);
+
+    document.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      
+      const container = slider.parentElement;
+      const rect = container.getBoundingClientRect();
+      let x = e.clientX - rect.left;
+      
+      x = Math.max(0, Math.min(x, rect.width));
+      const percentage = (x / rect.width) * 100;
+      
+      slider.style.left = percentage + '%';
+      beforeImage.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
+    });
+
+    // Parallax Effect
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      document.querySelectorAll('.parallax-layer').forEach((layer, index) => {
+        const speed = (index + 1) * 0.1;
+        layer.style.transform = `translateY(${scrolled * speed}px)`;
+      });
+    });
+  </script>
+
+  <!-- Slideshow Script - Separate to avoid conflicts -->
+  <script>
+    // Current slide index for each slideshow (dynamically populated)
+    var currentSlide = {};
+    
+    // Auto slide intervals
+    var autoSlideTimers = {};
+    var pauseTimers = {};
+
+    // Change slide function
+    function changeSlide(id, direction) {
+      var container = document.getElementById(id);
+      if (!container) return;
+      var images = container.querySelectorAll('.slide-img');
+      if (!images || images.length === 0) return;
+      
+      var total = images.length;
+      
+      // Initialize currentSlide for this ID if not exists
+      if (typeof currentSlide[id] === 'undefined') {
+        currentSlide[id] = 0;
+      }
+      
+      // Calculate new index
+      var newIndex = currentSlide[id] + direction;
+      if (newIndex >= total) newIndex = 0;
+      if (newIndex < 0) newIndex = total - 1;
+      
+      console.log('Changing slide for', id, 'from', currentSlide[id], 'to', newIndex);
+      
+      // Hide all images
+      for (var i = 0; i < images.length; i++) {
+        images[i].style.opacity = '0';
+      }
+      
+      // Show new image
+      if (images[newIndex]) {
+        images[newIndex].style.opacity = '1';
+      }
+      
+      // Update current slide index
+      currentSlide[id] = newIndex;
+      
+      // Stop auto-slide and pause for 20 seconds before resuming
+      pauseAutoSlideFunc(id);
+    }
+    
+    // Next slide - called from onclick
+    function nextSlide(id) {
+      changeSlide(id, 1);
+    }
+    
+    // Previous slide - called from onclick
+    function prevSlide(id) {
+      changeSlide(id, -1);
+    }
+    
+    // Start auto slide - works immediately regardless of scroll position
+    function startAutoSlideFunc(id) {
+      // IMPORTANT: Clear any existing timer first to prevent multiple intervals
+      if (autoSlideTimers[id]) {
+        clearInterval(autoSlideTimers[id]);
+        autoSlideTimers[id] = null;
+      }
+      
+      // Initialize currentSlide for this ID if not exists
+      if (typeof currentSlide[id] === 'undefined') {
+        currentSlide[id] = 0;
+      }
+      
+      var container = document.getElementById(id);
+      if (!container) {
+        console.log('Container not found:', id);
+        return;
+      }
+      
+      var images = container.querySelectorAll('.slide-img');
+      if (!images || images.length < 2) {
+        console.log('Not enough images for slideshow:', id, images ? images.length : 0);
+        return;
+      }
+      
+      console.log('Starting auto-slide for:', id, 'with', images.length, 'images');
+      
+      // Start new auto-slide interval
+      autoSlideTimers[id] = setInterval(function() {
+        var container = document.getElementById(id);
+        if (!container) {
+          clearInterval(autoSlideTimers[id]);
+          autoSlideTimers[id] = null;
+          return;
+        }
+        
+        var images = container.querySelectorAll('.slide-img');
+        if (!images || images.length === 0) {
+          clearInterval(autoSlideTimers[id]);
+          autoSlideTimers[id] = null;
+          return;
+        }
+        
+        var total = images.length;
+        
+        // Ensure currentSlide is initialized
+        if (typeof currentSlide[id] === 'undefined') {
+          currentSlide[id] = 0;
+        }
+        
+        // Calculate next index
+        var newIndex = (currentSlide[id] + 1) % total;
+        
+        console.log('Auto-sliding:', id, 'from', currentSlide[id], 'to', newIndex);
+        
+        // Hide all images
+        for (var i = 0; i < images.length; i++) {
+          images[i].style.opacity = '0';
+        }
+        
+        // Show next image
+        if (images[newIndex]) {
+          images[newIndex].style.opacity = '1';
+        }
+        
+        // Update current index
+        currentSlide[id] = newIndex;
+      }, 4000); // Auto-slide every 4 seconds
+    }
+    
+    // Pause auto slide for 20 seconds
+    function pauseAutoSlideFunc(id) {
+      // Stop current auto-slide timer
+      if (autoSlideTimers[id]) {
+        clearInterval(autoSlideTimers[id]);
+        autoSlideTimers[id] = null;
+      }
+      
+      // Clear any existing pause timer
+      if (pauseTimers[id]) {
+        clearTimeout(pauseTimers[id]);
+        pauseTimers[id] = null;
+      }
+      
+      // Set new pause timer - resume auto-slide after 20 seconds
+      pauseTimers[id] = setTimeout(function() {
+        startAutoSlideFunc(id);
+        pauseTimers[id] = null;
+      }, 20000);
+    }
+    
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      // Debug: Check API key on load
+      const savedApiKey = localStorage.getItem('alzain_ai_api_key');
+      console.log('🔑 API Key on page load:', savedApiKey ? 'YES (' + savedApiKey.substring(0, 10) + '...)' : 'NOT FOUND');
+      
+      // Note: Product slideshows are initialized dynamically when products are loaded
+      // This section is kept for backward compatibility with static products if any
+    });
+    
+    // Lightbox functionality
+    var lightboxCollection = '';
+    var lightboxIndex = 0;
+    var lightboxImages = [];
+    
+    function openLightbox(containerId, index) {
+      lightboxCollection = containerId;
+      lightboxIndex = index;
+      
+      // Get all images from this collection
+      var container = document.getElementById(containerId);
+      lightboxImages = Array.from(container.querySelectorAll('.slide-img')).map(function(img) {
+        return img.src;
+      });
+      
+      // Show lightbox
+      var lightbox = document.getElementById('lightbox');
+      var lightboxImg = document.getElementById('lightbox-img');
+      var counter = document.getElementById('lightbox-counter');
+      
+      lightboxImg.src = lightboxImages[lightboxIndex];
+      counter.textContent = (lightboxIndex + 1) + ' / ' + lightboxImages.length;
+      
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeLightbox() {
+      var lightbox = document.getElementById('lightbox');
+      lightbox.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+    
+    function lightboxNext() {
+      lightboxIndex = (lightboxIndex + 1) % lightboxImages.length;
+      var lightboxImg = document.getElementById('lightbox-img');
+      var counter = document.getElementById('lightbox-counter');
+      lightboxImg.src = lightboxImages[lightboxIndex];
+      counter.textContent = (lightboxIndex + 1) + ' / ' + lightboxImages.length;
+    }
+    
+    function lightboxPrev() {
+      lightboxIndex = (lightboxIndex - 1 + lightboxImages.length) % lightboxImages.length;
+      var lightboxImg = document.getElementById('lightbox-img');
+      var counter = document.getElementById('lightbox-counter');
+      lightboxImg.src = lightboxImages[lightboxIndex];
+      counter.textContent = (lightboxIndex + 1) + ' / ' + lightboxImages.length;
+    }
+    
+    // Close lightbox with ESC key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeLightbox();
+      } else if (e.key === 'ArrowRight') {
+        if (document.getElementById('lightbox').classList.contains('active')) {
+          lightboxNext();
+        }
+      } else if (e.key === 'ArrowLeft') {
+        if (document.getElementById('lightbox').classList.contains('active')) {
+          lightboxPrev();
+        }
+      }
+    });
+    
+    // Close lightbox when clicking outside image
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+      if (e.target.id === 'lightbox') {
+        closeLightbox();
+      }
+    });
+  </script>
+
+  <!-- Image Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" onclick="closeLightbox()">×</button>
+    <button class="lightbox-arrow left" onclick="lightboxPrev()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="3">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+    <button class="lightbox-arrow right" onclick="lightboxNext()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="3">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+    <div class="lightbox-content">
+      <img class="lightbox-image" id="lightbox-img" src="" alt="">
+    </div>
+    <div class="lightbox-counter" id="lightbox-counter"></div>
+  </div>
+
+  <!-- Order Modal -->
+  <div id="orderModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-6 z-50" style="display: none;">
+    <div class="glass-premium rounded-3xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="text-2xl font-black" style="background: linear-gradient(135deg, #FFC107, #FFD54F); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+          إتمام الطلب
+        </h3>
+        <button onclick="closeOrderModal()" class="text-3xl font-bold" style="color: var(--text-tertiary);">×</button>
+      </div>
+      
+      <div class="mb-6 p-6 rounded-2xl" style="background: var(--glass-bg); border: 1px solid var(--glass-border);">
+        <h4 class="text-xl font-bold mb-2" style="color: var(--text-primary);" id="orderProductName"></h4>
+        <p class="text-3xl font-black" style="background: linear-gradient(135deg, #FFC107, #FFD54F); -webkit-background-clip: text; -webkit-text-fill-color: transparent;" id="orderProductPrice"></p>
+      </div>
+
+      <form id="orderForm" class="space-y-4">
+        <div>
+          <label class="block text-sm font-bold mb-2" style="color: var(--text-secondary);">الاسم الكامل *</label>
+          <input type="text" id="customerName" required class="w-full px-4 py-3 rounded-xl" style="background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-primary);">
+        </div>
+
+        <div>
+          <label class="block text-sm font-bold mb-2" style="color: var(--text-secondary);">رقم الجوال *</label>
+          <input type="tel" id="customerPhone" required class="w-full px-4 py-3 rounded-xl" style="background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-primary);">
+        </div>
+
+        <div>
+          <label class="block text-sm font-bold mb-2" style="color: var(--text-secondary);">البريد الإلكتروني (اختياري)</label>
+          <input type="email" id="customerEmail" class="w-full px-4 py-3 rounded-xl" style="background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-primary);">
+        </div>
+
+        <div>
+          <label class="block text-sm font-bold mb-2" style="color: var(--text-secondary);">الكمية *</label>
+          <input type="number" id="orderQuantity" value="1" min="1" required class="w-full px-4 py-3 rounded-xl" style="background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-primary);">
+        </div>
+
+        <div>
+          <label class="block text-sm font-bold mb-2" style="color: var(--text-secondary);">ملاحظات إضافية (اختياري)</label>
+          <textarea id="orderNotes" rows="3" class="w-full px-4 py-3 rounded-xl" style="background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-primary);"></textarea>
+        </div>
+
+        <div id="orderSuccess" class="hidden p-4 rounded-xl mb-4" style="background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); color: #22c55e;">
+          <p class="font-bold">✓ تم إرسال طلبك بنجاح! سنتواصل معك قريباً.</p>
+        </div>
+
+        <div class="flex gap-4 pt-4">
+          <button type="submit" class="flex-1 btn-magnetic text-black font-black py-4 rounded-xl" style="box-shadow: 0 15px 45px rgba(255, 193, 7, 0.35);">
+            إرسال الطلب
+          </button>
+          <button type="button" onclick="closeOrderModal()" class="flex-1 glass-premium font-bold py-4 rounded-xl" style="color: var(--text-primary);">
+            إلغاء
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    let currentProduct = { name: '', price: '' };
+
+    // Handle order form submission (only need to set up once)
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('orderForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const quantity = parseInt(document.getElementById('orderQuantity').value);
+        const totalPrice = parseInt(currentProduct.price) * quantity;
+        
+        const order = {
+          id: Date.now(),
+          customerName: document.getElementById('customerName').value,
+          customerPhone: document.getElementById('customerPhone').value,
+          customerEmail: document.getElementById('customerEmail').value || '',
+          productName: currentProduct.name,
+          productId: currentProduct.id || currentProduct.name,
+          unitPrice: parseInt(currentProduct.price),
+          quantity: quantity,
+          totalPrice: totalPrice,
+          notes: document.getElementById('orderNotes').value || '',
+          status: 'new',
+          createdAt: new Date().toISOString()
+        };
+
+        // Save order to localStorage
+        let orders = JSON.parse(localStorage.getItem('alzain_orders') || '[]');
+        orders.push(order);
+        localStorage.setItem('alzain_orders', JSON.stringify(orders));
+        
+        // Track Purchase with professional data
+        trackPurchase({
+          id: order.id,
+          productName: order.productName,
+          productId: order.productId,
+          quantity: order.quantity,
+          unitPrice: order.unitPrice,
+          totalPrice: order.totalPrice,
+          category: 'مفروشات'
+        });
+        
+        // Track Lead with customer intent data
+        trackLead({
+          productName: order.productName,
+          value: order.totalPrice,
+          category: 'مفروشات'
+        });
+
+        // Show success message
+        document.getElementById('orderSuccess').classList.remove('hidden');
+        document.getElementById('orderForm').reset();
+        
+        setTimeout(() => {
+          closeOrderModal();
+          document.getElementById('orderSuccess').classList.add('hidden');
+        }, 3000);
+      });
+    });
+
+    function closeOrderModal() {
+      document.getElementById('orderModal').style.display = 'none';
+    }
+
+    // Store last products hash to detect changes
+    var lastProductsHash = '';
+
+    // Load products from localStorage
+    // Load products from localStorage
+    function loadProducts() {
+      const allProducts = JSON.parse(localStorage.getItem('alzain_products') || '[]');
+      
+      // Filter only active products (isActive !== false, default to true)
+      const products = allProducts.filter(p => p.isActive !== false);
+      
+      const productsGrid = document.getElementById('productsGrid');
+      
+      if (!productsGrid) {
+        return;
+      }
+
+      // Create a hash of current products to detect changes
+      const currentHash = JSON.stringify(products.map(p => ({id: p.id, name: p.name, price: p.price, images: p.images ? p.images.length : 0})));
+      
+      // Only reload if products actually changed
+      if (currentHash === lastProductsHash) {
+        return; // No changes, don't reload
+      }
+      
+      lastProductsHash = currentHash;
+      console.log('Products changed, reloading...');
+      
+      // Stop all existing slideshows before rebuilding
+      Object.keys(autoSlideTimers).forEach(id => {
+        if (autoSlideTimers[id]) {
+          clearInterval(autoSlideTimers[id]);
+          autoSlideTimers[id] = null;
+        }
+      });
+      Object.keys(pauseTimers).forEach(id => {
+        if (pauseTimers[id]) {
+          clearTimeout(pauseTimers[id]);
+          pauseTimers[id] = null;
+        }
+      });
+      
+      if (products.length === 0) {
+        productsGrid.innerHTML = `
+          <div class="col-span-2 text-center py-20">
+            <p class="text-2xl font-bold" style="color: var(--text-secondary);">لا توجد منتجات متاحة حالياً</p>
+            <p class="text-lg mt-4" style="color: var(--text-tertiary);">يرجى إضافة منتجات من لوحة التحكم</p>
+          </div>
+        `;
+        return;
+      }
+
+      productsGrid.innerHTML = products.map((product, index) => {
+        const slideshowId = `slideshow-${product.id}`;
+        const imagesHTML = product.images && product.images.length > 0 
+          ? product.images.map((img, i) => `
+              <img src="${img}" alt="${product.name}" class="slide-img" data-index="${i}" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; opacity: ${i === 0 ? 1 : 0}; transition: opacity 0.8s ease; cursor: pointer;">
+            `).join('')
+          : `<div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 193, 7, 0.05));"><span style="font-size: 80px;">🛋️</span></div>`;
+
+        return `
+          <div class="glass-premium rounded-2xl overflow-hidden group" data-product-id="${product.id}" data-product-name="${product.name}" data-product-price="${product.price}" data-product-category="${product.collection || 'مفروشات'}" style="transition: all 0.4s ease; transition-delay: ${index * 0.1}s;">
+            <div class="h-80 relative overflow-hidden">
+              <div class="slideshow-container" id="${slideshowId}" style="position: relative; width: 100%; height: 100%;">
+                ${imagesHTML}
+                
+                ${product.images && product.images.length > 1 ? `
+                  <!-- Navigation Arrows -->
+                  <button type="button" onclick="prevSlide('${slideshowId}')" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(255, 193, 7, 0.9); border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="3"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                  </button>
+                  <button type="button" onclick="nextSlide('${slideshowId}')" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(255, 193, 7, 0.9); border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="3"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                  </button>
+                ` : ''}
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-2xl font-black mb-2" style="color: var(--text-primary);">${product.name}</h3>
+              <p class="text-sm font-bold mb-4" style="color: var(--text-tertiary);">${product.description || product.collection}</p>
+              <div class="mb-5">
+                ${product.oldPrice ? `
+                  <div class="text-lg font-bold mb-1" style="color: #ef4444; text-decoration: line-through;">
+                    ${product.oldPrice.toLocaleString()} <span class="text-sm">دينار</span>
+                  </div>
+                ` : ''}
+                <div class="text-4xl font-black" style="background: linear-gradient(135deg, #FFC107, #FFD54F); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 2px 10px rgba(255, 193, 7, 0.3);">
+                  ${product.price.toLocaleString()} <span class="text-lg font-bold" style="color: var(--text-secondary);">دينار</span>
+                </div>
+              </div>
+              <div class="flex gap-3">
+                <button class="btn-magnetic flex-1 text-black font-black text-lg py-4 rounded-xl" style="box-shadow: 0 15px 45px rgba(255, 193, 7, 0.35);">
+                  اشتري الآن
+                </button>
+                <button class="ai-magic-btn font-black text-sm px-5 py-3 rounded-xl try-now-btn text-white relative" data-product="${product.name}" data-price="${product.price}" data-product-id="${product.id}" data-category="${product.collection}" style="white-space: nowrap;">
+                  <span class="sparkle" style="top: 20%; right: 10%;"></span>
+                  <span class="sparkle" style="bottom: 20%; left: 15%; animation-delay: 0.7s;"></span>
+                  <svg class="ai-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display: inline-block; vertical-align: middle; margin-left: 6px;">
+                    <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                  </svg>
+                  جرب بالذكاء الاصطناعي
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Store products reference for setTimeout
+      const loadedProducts = products;
+
+      // Initialize slideshows IMMEDIATELY after products are loaded
+      // No need to wait for user to scroll - start right away
+      setTimeout(function() {
+        console.log('Initializing slideshows for', loadedProducts.length, 'products');
+        
+        loadedProducts.forEach(function(product) {
+          const slideshowId = 'slideshow-' + product.id;
+          // Reset currentSlide for this slideshow
+          currentSlide[slideshowId] = 0;
+          
+          // Start auto-slide immediately for products with multiple images
+          if (product.images && product.images.length > 1) {
+            console.log('Starting slideshow:', slideshowId, 'with', product.images.length, 'images');
+            startAutoSlideFunc(slideshowId);
+          }
+        });
+
+        // Attach click events to product images for lightbox
+        var allProductImages = document.querySelectorAll('.slide-img');
+        allProductImages.forEach(function(img) {
+          img.addEventListener('click', function() {
+            var container = img.closest('.slideshow-container');
+            if (container) {
+              var containerId = container.id;
+              var images = Array.from(container.querySelectorAll('.slide-img')).map(function(i) { return i.src; });
+              openLightboxDirect(images, currentSlide[containerId] || 0);
+              
+              // Track ViewContent event with professional data
+              var productCard = container.closest('.glass-premium');
+              if (productCard) {
+                var productName = productCard.querySelector('h3').textContent;
+                var priceEl = productCard.querySelector('.text-4xl');
+                if (priceEl) {
+                  var price = priceEl.textContent.split(' ')[0].replace(/,/g, '');
+                  var productId = productCard.dataset.productId || productName;
+                  
+                  trackProductView({
+                    name: productName,
+                    price: price,
+                    id: productId,
+                    category: 'مفروشات'
+                  });
+                }
+              }
+            }
+          });
+        });
+
+        // Attach buy now button events
+        var buyButtons = document.querySelectorAll('.btn-magnetic');
+        buyButtons.forEach(function(button) {
+          button.addEventListener('click', function() {
+            var productCard = this.closest('.glass-premium');
+            if (!productCard) return;
+            var productName = productCard.querySelector('h3').textContent;
+            var priceEl = productCard.querySelector('.text-4xl');
+            if (!priceEl) return;
+            var priceText = priceEl.textContent;
+            var price = priceText.split(' ')[0].replace(/,/g, '');
+            
+            // Get product ID from data attribute if available
+            var productId = productCard.dataset.productId || productName;
+            
+            currentProduct = { name: productName, price: price, id: productId };
+            document.getElementById('orderProductName').textContent = productName;
+            document.getElementById('orderProductPrice').textContent = priceText;
+            document.getElementById('orderModal').style.display = 'flex';
+            
+            // Track InitiateCheckout with professional data
+            trackInitiateCheckout({
+              name: productName,
+              price: price,
+              id: productId,
+              category: 'مفروشات'
+            }, 1);
+          });
+        });
+        
+        // Attach AI try-now button events
+        if (typeof attachTryNowButtons === 'function') {
+          attachTryNowButtons();
+        }
+      }, 300);
+    }
+
+    // Lightbox function for dynamically loaded products
+    function openLightboxDirect(images, index) {
+      lightboxImages = images;
+      lightboxIndex = index;
+      
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      const counter = document.getElementById('lightbox-counter');
+      
+      lightboxImg.src = lightboxImages[lightboxIndex];
+      counter.textContent = (lightboxIndex + 1) + ' / ' + lightboxImages.length;
+      
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    // Initialize products immediately when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', loadProducts);
+    } else {
+      // DOM already loaded, execute immediately
+      loadProducts();
+    }
+
+    // Listen for changes from admin panel
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'alzain_products') {
+        loadProducts();
+      }
+    });
+
+    // Reload products every 5 seconds to check for updates
+    setInterval(loadProducts, 5000);
+  </script>
+
+</body>
+</html>

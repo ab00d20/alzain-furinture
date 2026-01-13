@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مصنع الزين للمفروشات | Ultra Modern</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { direction: rtl; scroll-behavior: smooth; }
+    body { 
+      background: #000000;
+      background-image: 
+        radial-gradient(at 20% 30%, rgba(255, 193, 7, 0.08) 0px, transparent 50%),
+        radial-gradient(at 80% 70%, rgba(255, 193, 7, 0.06) 0px, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(18, 18, 18, 1) 0px, transparent 100%);
+      background-attachment: fixed;
+      color: #ffffff; 
+      font-family: 'Tajawal', sans-serif;
+      overflow-x: hidden;
+    }
+    
+    /* Impressive Glass Effects */
+    .glass-impressive {
+      background: rgba(25, 25, 25, 0.7);
+      backdrop-filter: blur(32px) saturate(180%);
+      -webkit-backdrop-filter: blur(32px) saturate(180%);
+      border: 1.5px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        0 2px 8px rgba(255, 193, 7, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+    
+    .glass-strong-impressive {
+      background: rgba(35, 35, 35, 0.85);
+      backdrop-filter: blur(40px) saturate(180%);
+      -webkit-backdrop-filter: blur(40px) saturate(180%);
+      border: 1.5px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 
+        0 12px 48px rgba(0, 0, 0, 0.5),
+        0 4px 12px rgba(255, 193, 7, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    }
+    
+    .glass-gold-impressive {
+      background: linear-gradient(135deg, 
+        rgba(255, 193, 7, 0.18) 0%, 
+        rgba(255, 213, 79, 0.12) 50%, 
+        rgba(255, 193, 7, 0.16) 100%);
+      backdrop-filter: blur(36px) saturate(180%);
+      -webkit-backdrop-filter: blur(36px) saturate(180%);
+      border: 1.5px solid rgba(255, 193, 7, 0.35);
+      box-shadow: 
+        0 8px 24px rgba(255, 193, 7, 0.2),
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
+    
+    .btn-gold-impressive {
+      background: linear-gradient(135deg, #FFC107 0%, #FFD54F 50%, #FFB300 100%);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 
+        0 8px 24px rgba(255, 193, 7, 0.4),
+        0 4px 12px rgba(0, 0, 0, 0.3),
+        inset 0 2px 0 rgba(255, 255, 255, 0.3),
+        inset 0 -2px 0 rgba(0, 0, 0, 0.2);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn-gold-impressive::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.5s;
+    }
+    
+    .btn-gold-impressive:hover::before {
+      left: 100%;
+    }
+    
+    .btn-gold-impressive:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 
+        0 12px 32px rgba(255, 193, 7, 0.5),
+        0 6px 16px rgba(0, 0, 0, 0.4),
+        inset 0 2px 0 rgba(255, 255, 255, 0.4);
+    }
+    
+    .btn-glass-impressive {
+      background: rgba(45, 45, 45, 0.6);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border: 1.5px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 
+        0 8px 24px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .btn-glass-impressive:hover {
+      background: rgba(55, 55, 55, 0.7);
+      border-color: rgba(255, 193, 7, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 
+        0 12px 32px rgba(255, 193, 7, 0.2),
+        0 4px 12px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
+    
+    .text-glow-impressive {
+      text-shadow: 
+        0 0 40px rgba(255, 193, 7, 0.4),
+        0 0 20px rgba(255, 193, 7, 0.3),
+        0 4px 8px rgba(0, 0, 0, 0.5);
+    }
+    
+    .card-impressive {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+    
+    .card-impressive::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1.5px;
+      background: linear-gradient(135deg, rgba(255, 193, 7, 0), rgba(255, 193, 7, 0.3));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    
+    .card-impressive:hover {
+      transform: translateY(-8px);
+    }
+    
+    .card-impressive:hover::before {
+      opacity: 1;
+    }
+    
+    .floating {
+      animation: floating 3s ease-in-out infinite;
+    }
+    
+    @keyframes floating {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    .shimmer {
+      background: linear-gradient(90deg, 
+        rgba(255, 193, 7, 0) 0%,
+        rgba(255, 193, 7, 0.2) 50%,
+        rgba(255, 193, 7, 0) 100%);
+      background-size: 200% 100%;
+      animation: shimmer 2s infinite;
+    }
+    
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    
+    ::-webkit-scrollbar { width: 12px; }
+    ::-webkit-scrollbar-track { 
+      background: rgba(20, 20, 20, 0.8);
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb { 
+      background: linear-gradient(180deg, #FFC107, #FFB300);
+      border-radius: 10px;
+      border: 2px solid rgba(20, 20, 20, 0.8);
+      box-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(180deg, #FFD54F, #FFC107);
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Header -->
+  <header class="fixed top-4 right-4 left-4 z-50 glass-strong-impressive rounded-3xl mx-auto max-w-7xl">
+    <div class="px-8 py-5">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4 floating">
+          <div class="w-14 h-14 bg-gradient-to-br from-amber-300 via-amber-400 to-amber-600 rounded-2xl flex items-center justify-center font-black text-3xl text-black shadow-2xl" style="box-shadow: 0 8px 24px rgba(255, 193, 7, 0.4);">
+            ز
+          </div>
+          <div>
+            <h1 class="text-xl font-black text-glow-impressive" style="background: linear-gradient(to left, #FFC107, #FFD54F); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">مصنع الزين</h1>
+            <p class="text-sm text-gray-300 font-bold">للمفروشات الراقية</p>
+          </div>
+        </div>
+        <nav class="hidden md:flex items-center gap-3">
+          <button class="glass-gold-impressive text-white font-black px-8 py-3 rounded-2xl text-sm hover:scale-105 transition-all">الرئيسية</button>
+          <button class="btn-glass-impressive text-gray-200 font-bold px-8 py-3 rounded-2xl text-sm">أحدث الموديلات</button>
+          <button class="btn-glass-impressive text-gray-200 font-bold px-8 py-3 rounded-2xl text-sm">عن المصنع</button>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative min-h-screen flex items-center justify-center pt-32 pb-24">
+    <!-- Animated Background Particles -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="absolute w-96 h-96 bg-amber-500/10 rounded-full blur-3xl top-20 right-20 animate-pulse"></div>
+      <div class="absolute w-96 h-96 bg-amber-600/10 rounded-full blur-3xl bottom-20 left-20 animate-pulse" style="animation-delay: 1s;"></div>
+    </div>
+    
+    <div class="container mx-auto px-6 z-10 text-center">
+      <div class="inline-flex items-center gap-3 glass-gold-impressive rounded-full px-6 py-3 mb-10 text-base font-black text-white shimmer">
+        <span class="text-2xl">✨</span>
+        <span>تقنية الذكاء الاصطناعي 2026</span>
+      </div>
+      
+      <h1 class="text-6xl md:text-7xl lg:text-8xl font-black mb-10 leading-tight">
+        <span class="text-white">صمم غرفتك</span><br>
+        <span class="text-glow-impressive" style="background: linear-gradient(135deg, #FFC107 0%, #FFD54F 50%, #FFA000 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">بلمسة ذكاء واحدة</span>
+      </h1>
+      
+      <p class="text-2xl text-gray-300 mb-14 max-w-3xl mx-auto leading-relaxed font-bold">
+        ارفع صورة غرفتك وشوف أحدث موديلات مصنع الزين في بيتك فوراً
+      </p>
+      
+      <div class="flex flex-col sm:flex-row gap-5 justify-center items-center mb-20">
+        <button class="btn-gold-impressive text-black font-black text-xl px-12 py-5 rounded-2xl flex items-center gap-3 shadow-2xl">
+          <span>جرب الآن مجاناً</span>
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+          </svg>
+        </button>
+        
+        <button class="btn-glass-impressive text-white font-bold text-lg px-10 py-5 rounded-2xl">
+          شاهد العرض التوضيحي
+        </button>
+      </div>
+      
+      <div class="grid grid-cols-3 gap-8 max-w-4xl mx-auto">
+        <div class="glass-impressive rounded-3xl p-8 card-impressive">
+          <div class="text-4xl font-black mb-3 text-glow-impressive" style="background: linear-gradient(to bottom, #FFC107, #FFB300); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">+500</div>
+          <div class="text-base text-gray-300 font-bold">موديل حديث</div>
+        </div>
+        <div class="glass-impressive rounded-3xl p-8 card-impressive">
+          <div class="text-4xl font-black mb-3 text-glow-impressive" style="background: linear-gradient(to bottom, #FFC107, #FFB300); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">+10K</div>
+          <div class="text-base text-gray-300 font-bold">عميل راضي</div>
+        </div>
+        <div class="glass-impressive rounded-3xl p-8 card-impressive">
+          <div class="text-4xl font-black mb-3 text-glow-impressive" style="background: linear-gradient(to bottom, #FFC107, #FFB300); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">25+</div>
+          <div class="text-base text-gray-300 font-bold">سنة خبرة</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI Tool Section -->
+  <section class="py-24 px-6">
+    <div class="container mx-auto max-w-6xl">
+      <div class="text-center mb-16">
+        <h2 class="text-5xl md:text-6xl font-black text-white mb-6">
+          جرب <span class="text-glow-impressive" style="background: linear-gradient(135deg, #FFC107, #FFD54F); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">الذكاء الاصطناعي</span> الآن
+        </h2>
+        <p class="text-gray-300 text-xl font-bold mb-6">ارفع صورة غرفتك وشوف الموديلات بشكل واقعي</p>
+        <div class="glass-gold-impressive inline-block px-8 py-3 rounded-full text-base font-black text-white">
+          المحاولات المتبقية: 7 / 7 ⚡
+        </div>
+      </div>
+      
+      <div class="grid lg:grid-cols-2 gap-8">
+        <div class="border-2 border-dashed border-gray-700 hover:border-amber-400 rounded-3xl p-16 text-center cursor-pointer transition-all duration-500 glass-impressive card-impressive">
+          <div class="mb-8 floating">
+            <svg class="w-20 h-20 text-amber-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="filter: drop-shadow(0 0 20px rgba(255, 193, 7, 0.4));">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-black text-white mb-3">اسحب صورة غرفتك هنا</h3>
+          <p class="text-gray-300 font-bold text-lg">أو اضغط لاختيار صورة من جهازك</p>
+        </div>
+        
+        <div class="glass-strong-impressive rounded-3xl p-16 flex items-center justify-center min-h-[450px] relative overflow-hidden">
+          <div class="absolute inset-0 shimmer opacity-30"></div>
+          <div class="text-center relative z-10">
+            <div class="w-24 h-24 glass-gold-impressive rounded-3xl flex items-center justify-center mx-auto mb-6 floating">
+              <svg class="w-12 h-12 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="filter: drop-shadow(0 0 10px rgba(255, 193, 7, 0.5));">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <p class="text-gray-400 font-bold text-lg">النتيجة ستظهر هنا</p>
+          </div>
+        </div>
+      </div>
+      
+      <button class="btn-gold-impressive text-black font-black text-xl px-12 py-5 rounded-2xl w-full mt-10 flex items-center justify-center gap-4 shadow-2xl">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+        </svg>
+        <span>توليد التصميم الآن</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- Latest Models -->
+  <section class="py-24 px-6">
+    <div class="container mx-auto max-w-7xl">
+      <div class="text-center mb-16">
+        <h2 class="text-5xl font-black text-white mb-6">أحدث <span class="text-glow-impressive" style="background: linear-gradient(135deg, #FFC107, #FFD54F); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">موديلاتنا</span></h2>
+        <p class="text-gray-300 text-xl font-bold">تشكيلة 2026 - حصرياً من مصنع الزين</p>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="glass-strong-impressive rounded-3xl overflow-hidden card-impressive">
+          <div class="h-64 bg-gradient-to-br from-gray-700 via-gray-800 to-gray-900 relative">
+            <div class="absolute inset-0 shimmer opacity-20"></div>
+          </div>
+          <div class="p-8">
+            <h3 class="text-xl font-black text-white mb-3">كنبة لوكس الملكية</h3>
+            <div class="text-3xl font-black mb-4" style="background: linear-gradient(to left, #FFC107, #FFB300); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+              2,499 <span class="text-lg text-gray-400">دينار</span>
+            </div>
+            <button class="btn-glass-impressive w-full py-3 rounded-xl text-white font-bold">عرض التفاصيل</button>
+          </div>
+        </div>
+        <div class="glass-strong-impressive rounded-3xl overflow-hidden card-impressive">
+          <div class="h-64 bg-gradient-to-br from-gray-700 via-gray-800 to-gray-900 relative">
+            <div class="absolute inset-0 shimmer opacity-20"></div>
+          </div>
+          <div class="p-8">
+            <h3 class="text-xl font-black text-white mb-3">صوفا مودرن إيليت</h3>
+            <div class="text-3xl font-black mb-4" style="background: linear-gradient(to left, #FFC107, #FFB300); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+              1,899 <span class="text-lg text-gray-400">دينار</span>
+            </div>
+            <button class="btn-glass-impressive w-full py-3 rounded-xl text-white font-bold">عرض التفاصيل</button>
+          </div>
+        </div>
+        <div class="glass-strong-impressive rounded-3xl overflow-hidden card-impressive">
+          <div class="h-64 bg-gradient-to-br from-gray-700 via-gray-800 to-gray-900 relative">
+            <div class="absolute inset-0 shimmer opacity-20"></div>
+          </div>
+          <div class="p-8">
+            <h3 class="text-xl font-black text-white mb-3">كنبة فيلفت الذهبية</h3>
+            <div class="text-3xl font-black mb-4" style="background: linear-gradient(to left, #FFC107, #FFB300); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+              3,299 <span class="text-lg text-gray-400">دينار</span>
+            </div>
+            <button class="btn-glass-impressive w-full py-3 rounded-xl text-white font-bold">عرض التفاصيل</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="glass-strong-impressive border-t-2 border-amber-400/20 py-16 px-6 mt-24 mx-4 rounded-t-3xl">
+    <div class="container mx-auto max-w-6xl text-center">
+      <div class="flex items-center justify-center gap-4 mb-8 floating">
+        <div class="w-16 h-16 bg-gradient-to-br from-amber-300 via-amber-400 to-amber-600 rounded-2xl flex items-center justify-center font-black text-3xl text-black shadow-2xl" style="box-shadow: 0 12px 32px rgba(255, 193, 7, 0.5);">ز</div>
+        <div>
+          <h3 class="text-2xl font-black text-glow-impressive" style="background: linear-gradient(to left, #FFC107, #FFD54F); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">مصنع الزين</h3>
+          <p class="text-base text-gray-300 font-bold">للمفروشات الراقية</p>
+        </div>
+      </div>
+      <p class="text-gray-300 text-lg font-bold mb-8">نصنع الفخامة والراحة في كل قطعة أثاث</p>
+      <p class="text-gray-400 text-base font-bold">© 2026 مصنع الزين للمفروشات. جميع الحقوق محفوظة.</p>
+      <p class="text-gray-500 text-sm mt-3 font-bold">صُنع بـ <span class="text-amber-400 text-lg">♥</span> في الأردن</p>
+    </div>
+  </footer>
+
+</body>
+</html>

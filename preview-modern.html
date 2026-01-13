@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مصنع الزين للمفروشات | Modern Minimal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { direction: rtl; scroll-behavior: smooth; }
+    body { 
+      background: #000000;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(255, 193, 7, 0.03) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(255, 193, 7, 0.02) 0px, transparent 50%);
+      background-attachment: fixed;
+      color: #ffffff; 
+      font-family: 'Tajawal', sans-serif;
+      overflow-x: hidden;
+    }
+    
+    /* Refined Glass Effects */
+    .glass-minimal {
+      background: rgba(20, 20, 20, 0.6);
+      backdrop-filter: blur(20px) saturate(150%);
+      -webkit-backdrop-filter: blur(20px) saturate(150%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+    
+    .glass-strong {
+      background: rgba(30, 30, 30, 0.75);
+      backdrop-filter: blur(28px) saturate(160%);
+      -webkit-backdrop-filter: blur(28px) saturate(160%);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    }
+    
+    .glass-gold-refined {
+      background: linear-gradient(135deg, rgba(255, 193, 7, 0.12) 0%, rgba(255, 213, 79, 0.08) 50%, rgba(255, 193, 7, 0.1) 100%);
+      backdrop-filter: blur(24px) saturate(150%);
+      -webkit-backdrop-filter: blur(24px) saturate(150%);
+      border: 1px solid rgba(255, 193, 7, 0.2);
+      box-shadow: 0 4px 16px rgba(255, 193, 7, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, #FFC107 0%, #FFB300 100%);
+      border: 1px solid rgba(255, 193, 7, 0.25);
+      box-shadow: 0 4px 14px rgba(255, 193, 7, 0.22), 0 2px 6px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(255, 193, 7, 0.28), 0 3px 8px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+    
+    .btn-secondary {
+      background: rgba(40, 40, 40, 0.5);
+      backdrop-filter: blur(16px) saturate(150%);
+      -webkit-backdrop-filter: blur(16px) saturate(150%);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      transition: all 0.3s ease;
+    }
+    
+    .btn-secondary:hover {
+      background: rgba(50, 50, 50, 0.6);
+      border-color: rgba(255, 193, 7, 0.25);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(255, 193, 7, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+    
+    .text-glow-subtle {
+      text-shadow: 0 0 30px rgba(255, 193, 7, 0.25), 0 2px 4px rgba(0, 0, 0, 0.4);
+    }
+    
+    .card-hover {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .card-hover:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 193, 7, 0.25);
+    }
+    
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: rgba(20, 20, 20, 0.5); }
+    ::-webkit-scrollbar-thumb { 
+      background: linear-gradient(180deg, #FFC107, #FFB300);
+      border-radius: 10px;
+      border: 2px solid rgba(20, 20, 20, 0.5);
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Header -->
+  <header class="fixed top-4 right-4 left-4 z-50 glass-strong rounded-3xl mx-auto max-w-7xl">
+    <div class="px-6 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 bg-gradient-to-br from-amber-400 to-amber-600 rounded-2xl flex items-center justify-center font-black text-2xl text-black shadow-lg">
+            ز
+          </div>
+          <div>
+            <h1 class="text-lg font-black text-amber-400">مصنع الزين</h1>
+            <p class="text-xs text-gray-400 font-medium">للمفروشات الراقية</p>
+          </div>
+        </div>
+        <nav class="hidden md:flex items-center gap-2">
+          <button class="glass-gold-refined text-white font-bold px-6 py-2.5 rounded-2xl text-sm hover:scale-[1.02] transition-transform">الرئيسية</button>
+          <button class="btn-secondary text-gray-300 font-bold px-6 py-2.5 rounded-2xl text-sm hover:scale-[1.02] transition-transform">أحدث الموديلات</button>
+          <button class="btn-secondary text-gray-300 font-bold px-6 py-2.5 rounded-2xl text-sm hover:scale-[1.02] transition-transform">عن المصنع</button>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative min-h-screen flex items-center justify-center pt-28 pb-20">
+    <div class="container mx-auto px-6 z-10 text-center">
+      <div class="inline-flex items-center gap-3 glass-gold-refined rounded-full px-5 py-2.5 mb-8 text-sm font-bold text-white">
+        <span class="text-lg">✨</span>
+        <span>تقنية الذكاء الاصطناعي 2026</span>
+      </div>
+      
+      <h1 class="text-5xl md:text-6xl lg:text-7xl font-black mb-8 leading-tight">
+        <span class="text-white">صمم غرفتك</span><br>
+        <span class="text-glow-subtle" style="background: linear-gradient(to left, #FFC107, #FFD54F); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">بلمسة ذكاء واحدة</span>
+      </h1>
+      
+      <p class="text-xl text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed font-medium">
+        ارفع صورة غرفتك وشوف أحدث موديلات مصنع الزين في بيتك فوراً
+      </p>
+      
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+        <button class="btn-primary text-black font-black text-lg px-10 py-4 rounded-2xl hover:scale-[1.02] transition-all flex items-center gap-3">
+          <span>جرب الآن مجاناً</span>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+          </svg>
+        </button>
+        
+        <button class="btn-secondary text-white font-bold text-base px-8 py-4 rounded-2xl hover:scale-[1.02] transition-all">
+          شاهد العرض التوضيحي
+        </button>
+      </div>
+      
+      <div class="grid grid-cols-3 gap-6 max-w-3xl mx-auto">
+        <div class="glass-minimal rounded-3xl p-6 card-hover">
+          <div class="text-3xl font-black mb-2 text-amber-400">+500</div>
+          <div class="text-sm text-gray-400 font-medium">موديل حديث</div>
+        </div>
+        <div class="glass-minimal rounded-3xl p-6 card-hover">
+          <div class="text-3xl font-black mb-2 text-amber-400">+10K</div>
+          <div class="text-sm text-gray-400 font-medium">عميل راضي</div>
+        </div>
+        <div class="glass-minimal rounded-3xl p-6 card-hover">
+          <div class="text-3xl font-black mb-2 text-amber-400">25+</div>
+          <div class="text-sm text-gray-400 font-medium">سنة خبرة</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI Tool Section -->
+  <section class="py-20 px-6">
+    <div class="container mx-auto max-w-6xl">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl md:text-5xl font-black text-white mb-4">
+          جرب <span class="text-amber-400">الذكاء الاصطناعي</span> الآن
+        </h2>
+        <p class="text-gray-400 text-lg">ارفع صورة غرفتك وشوف الموديلات بشكل واقعي</p>
+        <div class="mt-4 glass-gold-refined inline-block px-5 py-2 rounded-full text-sm font-bold text-white">
+          المحاولات المتبقية: 7 / 7
+        </div>
+      </div>
+      
+      <div class="grid lg:grid-cols-2 gap-8">
+        <div class="border border-dashed border-gray-700 hover:border-amber-400 rounded-3xl p-12 text-center cursor-pointer transition-all duration-300 glass-minimal card-hover">
+          <div class="mb-6">
+            <svg class="w-16 h-16 text-amber-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">اسحب صورة غرفتك هنا</h3>
+          <p class="text-gray-400">أو اضغط لاختيار صورة من جهازك</p>
+        </div>
+        
+        <div class="glass-strong rounded-3xl p-12 flex items-center justify-center min-h-[400px]">
+          <div class="text-center">
+            <div class="w-20 h-20 glass-gold-refined rounded-3xl flex items-center justify-center mx-auto mb-4">
+              <svg class="w-10 h-10 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <p class="text-gray-500">النتيجة ستظهر هنا</p>
+          </div>
+        </div>
+      </div>
+      
+      <button class="btn-primary text-black font-black text-lg px-10 py-4 rounded-2xl w-full mt-8 hover:scale-[1.01] transition-transform flex items-center justify-center gap-3">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+        </svg>
+        <span>توليد التصميم الآن</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- Latest Models -->
+  <section class="py-20 px-6">
+    <div class="container mx-auto max-w-7xl">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-black text-white mb-4">أحدث <span class="text-amber-400">موديلاتنا</span></h2>
+        <p class="text-gray-400 text-lg">تشكيلة 2026 - حصرياً من مصنع الزين</p>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="glass-strong rounded-3xl overflow-hidden card-hover">
+          <div class="h-56 bg-gradient-to-br from-gray-800 to-gray-900"></div>
+          <div class="p-6">
+            <h3 class="text-lg font-bold text-white mb-2">كنبة لوكس الملكية</h3>
+            <div class="text-2xl font-black text-amber-400">2,499 <span class="text-sm text-gray-400">دينار</span></div>
+          </div>
+        </div>
+        <div class="glass-strong rounded-3xl overflow-hidden card-hover">
+          <div class="h-56 bg-gradient-to-br from-gray-800 to-gray-900"></div>
+          <div class="p-6">
+            <h3 class="text-lg font-bold text-white mb-2">صوفا مودرن إيليت</h3>
+            <div class="text-2xl font-black text-amber-400">1,899 <span class="text-sm text-gray-400">دينار</span></div>
+          </div>
+        </div>
+        <div class="glass-strong rounded-3xl overflow-hidden card-hover">
+          <div class="h-56 bg-gradient-to-br from-gray-800 to-gray-900"></div>
+          <div class="p-6">
+            <h3 class="text-lg font-bold text-white mb-2">كنبة فيلفت الذهبية</h3>
+            <div class="text-2xl font-black text-amber-400">3,299 <span class="text-sm text-gray-400">دينار</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="glass-strong border-t border-gray-800 py-12 px-6 mt-20 mx-4 rounded-t-3xl">
+    <div class="container mx-auto max-w-6xl text-center">
+      <div class="flex items-center justify-center gap-3 mb-6">
+        <div class="w-14 h-14 bg-gradient-to-br from-amber-400 to-amber-600 rounded-2xl flex items-center justify-center font-black text-2xl text-black">ز</div>
+        <div>
+          <h3 class="text-xl font-black text-amber-400">مصنع الزين</h3>
+          <p class="text-sm text-gray-400">للمفروشات الراقية</p>
+        </div>
+      </div>
+      <p class="text-gray-400 mb-6">نصنع الفخامة والراحة في كل قطعة أثاث</p>
+      <p class="text-gray-500 text-sm">© 2026 مصنع الزين للمفروشات. جميع الحقوق محفوظة.</p>
+      <p class="text-gray-600 text-xs mt-2">صُنع بـ <span class="text-amber-400">♥</span> في الأردن</p>
+    </div>
+  </footer>
+
+</body>
+</html>
