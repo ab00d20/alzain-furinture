@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "node static-server.js",
-    "build": "echo 'Static site - no build needed' && cp preview-ultimate.html index.html",
+    "build": "echo 'Static site - no build needed'",
     "start": "node static-server.js",
     "lint": "echo 'No lint for static site'"
   },

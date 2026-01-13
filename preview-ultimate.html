@@ -3439,11 +3439,46 @@ Remember: This is for the Alzain Furniture premium brand. The output must reflec
 
     // Store last products hash to detect changes
     var lastProductsHash = '';
+    var isServerMode = false;
 
-    // Load products from localStorage
-    // Load products from localStorage
-    function loadProducts() {
-      const allProducts = JSON.parse(localStorage.getItem('alzain_products') || '[]');
+    // Check if server API is available
+    async function checkServerAPI() {
+      try {
+        const response = await fetch('/api/products');
+        if (response.ok) {
+          isServerMode = true;
+          console.log('✅ Server API detected');
+          return true;
+        }
+      } catch (e) {}
+      isServerMode = false;
+      return false;
+    }
+
+    // Load products from Server API or localStorage
+    async function loadProducts() {
+      let allProducts = [];
+      
+      try {
+        // Check if server API is available
+        await checkServerAPI();
+        
+        if (isServerMode) {
+          // Load from server
+          const response = await fetch('/api/products');
+          const data = await response.json();
+          if (data.success && data.products) {
+            allProducts = data.products;
+            console.log(`📡 Loaded ${allProducts.length} products from server`);
+          }
+        } else {
+          // Load from localStorage
+          allProducts = JSON.parse(localStorage.getItem('alzain_products') || '[]');
+        }
+      } catch (error) {
+        console.error('Load error:', error);
+        allProducts = JSON.parse(localStorage.getItem('alzain_products') || '[]');
+      }
       
       // Filter only active products (isActive !== false, default to true)
       const products = allProducts.filter(p => p.isActive !== false);
