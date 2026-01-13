@@ -1715,60 +1715,89 @@
     }
 
     // Initialize on page load
-    // Initialize on page load
     document.addEventListener('DOMContentLoaded', async function() {
+      console.log('🚀 Admin panel initializing...');
+      
       // Add sidebar class for mobile
       const sidebar = document.querySelector('.w-72');
       if (sidebar) {
         sidebar.classList.add('sidebar');
       }
       
-      // Auto-login for development (remove password requirement)
+      // Auto-login for development
       currentUser = 'Admin';
-      document.getElementById('welcomeUser').textContent = `مرحباً، ${currentUser}`;
-      
-      // Initialize IndexedDB and load data
-      try {
-        await initIndexedDB();
-        await loadData();
-      } catch (error) {
-        console.error('Initialization error:', error);
-        loadData(); // Fallback to localStorage
+      const welcomeEl = document.getElementById('welcomeUser');
+      if (welcomeEl) {
+        welcomeEl.textContent = `مرحباً، ${currentUser}`;
       }
       
-      loadCategories(); // Load categories
-      updateStats();
-      loadProducts();
-      
-      // Load AI settings
-      loadAiSettings();
-      
-      // Refresh analytics on page load
-      setTimeout(() => {
-        refreshMainSiteAnalytics();
-        refreshAdminAnalytics();
-        refreshAiStats(); // Also refresh AI stats
-      }, 500);
-      
-      // Image preview on file select with star feature and compression
-      document.getElementById('productImages').addEventListener('change', function(e) {
-        const preview = document.getElementById('imagePreview');
-        preview.innerHTML = '';
-        const files = Array.from(e.target.files);
-        
-        // Show loading message
-        if (files.length > 0) {
-          preview.innerHTML = '<div class="col-span-4 text-center text-amber-600 font-bold">جاري ضغط الصور...</div>';
+      // Initialize data loading in background - don't block UI
+      (async function loadDataAsync() {
+        try {
+          console.log('📂 Loading data...');
+          await initIndexedDB();
+          await loadData();
+          console.log('✅ Data loaded successfully');
+        } catch (error) {
+          console.error('⚠️ Data load error:', error);
+          // Try localStorage fallback
+          try {
+            const savedProducts = localStorage.getItem('alzain_products');
+            if (savedProducts) products = JSON.parse(savedProducts);
+          } catch (e) {}
         }
         
-        // Compress all images first
-        const compressPromises = files.map(file => compressImage(file));
-        
-        Promise.all(compressPromises).then(compressedImages => {
+        // Update UI after data loads
+        try {
+          loadCategories();
+          updateStats();
+          loadProducts();
+        } catch (e) {
+          console.error('UI update error:', e);
+        }
+      })();
+      
+      // Load AI settings (non-blocking)
+      try {
+        loadAiSettings();
+      } catch (e) {
+        console.error('AI settings error:', e);
+      }
+      
+      // Refresh analytics on page load (delayed, non-blocking)
+      setTimeout(() => {
+        try {
+          refreshMainSiteAnalytics();
+          refreshAdminAnalytics();
+          refreshAiStats();
+        } catch (e) {
+          console.error('Analytics error:', e);
+        }
+      }, 500);
+      
+      console.log('✅ Admin panel ready - all click handlers active');
+      
+      // Image preview on file select with star feature and compression
+      const productImagesEl = document.getElementById('productImages');
+      if (productImagesEl) {
+        productImagesEl.addEventListener('change', function(e) {
+          const preview = document.getElementById('imagePreview');
           preview.innerHTML = '';
+          const files = Array.from(e.target.files);
           
-          compressedImages.forEach((compressedSrc, index) => {
-            const container = document.createElement('div');
+          // Show loading message
+          if (files.length > 0) {
+            preview.innerHTML = '<div class="col-span-4 text-center text-amber-600 font-bold">جاري ضغط الصور...</div>';
+          }
+        
+          // Compress all images first
+          const compressPromises = files.map(file => compressImage(file));
+        
+          Promise.all(compressPromises).then(compressedImages => {
+            preview.innerHTML = '';
+          
+            compressedImages.forEach((compressedSrc, index) => {
+              const container = document.createElement('div');
             container.className = 'relative group';
             container.dataset.index = index;
             
@@ -1813,22 +1842,25 @@
           // Store compressed images for later use
           preview.dataset.compressedImages = JSON.stringify(compressedImages);
         });
-      });
+      }); // end productImages change listener
+      } // end if productImagesEl
       
       // Create Category Form Handler
-      document.getElementById('createCategoryForm').addEventListener('submit', function(e) {
-        e.preventDefault();
+      const createCategoryForm = document.getElementById('createCategoryForm');
+      if (createCategoryForm) {
+        createCategoryForm.addEventListener('submit', function(e) {
+          e.preventDefault();
         
-        const categoryName = document.getElementById('newCategoryName').value.trim();
+          const categoryName = document.getElementById('newCategoryName').value.trim();
         
-        if (!categoryName) {
-          alert('الرجاء إدخال اسم الفئة');
-          return;
-        }
+          if (!categoryName) {
+            alert('الرجاء إدخال اسم الفئة');
+            return;
+          }
         
-        if (categories.includes(categoryName)) {
-          alert('هذه الفئة موجودة بالفعل');
-          return;
+          if (categories.includes(categoryName)) {
+            alert('هذه الفئة موجودة بالفعل');
+            return;
         }
         
         // Add the new category
@@ -1852,7 +1884,8 @@
         setTimeout(() => {
           notification.remove();
         }, 3000);
-      });
+      }); // end createCategoryForm submit
+      } // end if createCategoryForm
       
       // Login form (disabled until launch)
       // document.getElementById('loginForm').addEventListener('submit', (e) => {
