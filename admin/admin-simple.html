@@ -1365,14 +1365,23 @@
     // Check if we're running on a server with API support
     async function checkServerMode() {
       try {
-        const response = await fetch('/api/products', { method: 'GET' });
+        // Add timeout to prevent freezing
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3000); // 3 second timeout
+        
+        const response = await fetch('/api/products', { 
+          method: 'GET',
+          signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+        
         if (response.ok) {
           isOnlineMode = true;
           console.log('✅ Server API detected - using online storage');
           return true;
         }
       } catch (e) {
-        console.log('📂 No server API - using local storage');
+        console.log('📂 No server API or timeout - using local storage');
       }
       isOnlineMode = false;
       return false;
@@ -1433,22 +1442,37 @@
 
     // Load from Server API (primary) or IndexedDB/localStorage (fallback)
     async function loadData() {
+      console.log('🔄 Loading data...');
+      
       try {
-        // Check if server API is available
+        // Check if server API is available (with timeout)
         await checkServerMode();
         
         if (isOnlineMode) {
-          // Load from server API
+          // Load from server API with timeout
           console.log('📡 Loading data from server...');
-          const response = await fetch('/api/products');
-          const data = await response.json();
           
-          if (data.success && data.products) {
-            products = data.products;
-            console.log(`✅ Loaded ${products.length} products from server`);
+          try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+            
+            const response = await fetch('/api/products', { signal: controller.signal });
+            clearTimeout(timeoutId);
+            
+            const data = await response.json();
+            
+            if (data.success && data.products) {
+              products = data.products;
+              console.log(`✅ Loaded ${products.length} products from server`);
+            }
+          } catch (fetchError) {
+            console.error('Server fetch failed, using localStorage:', fetchError);
+            isOnlineMode = false;
+            const savedProducts = localStorage.getItem('alzain_products');
+            if (savedProducts) products = JSON.parse(savedProducts);
           }
           
-          // Load orders and deleted from localStorage (server doesn't store these yet)
+          // Load orders and deleted from localStorage
           const savedOrders = localStorage.getItem('alzain_orders');
           const savedDeleted = localStorage.getItem('alzain_deleted_products');
           if (savedOrders) orders = JSON.parse(savedOrders);
@@ -1456,25 +1480,28 @@
           
         } else {
           // Fallback to IndexedDB/localStorage
-          if (!db) await initIndexedDB();
+          console.log('📂 Using local storage...');
           
-          const transaction = db.transaction(['products', 'orders', 'deletedProducts'], 'readonly');
+          try {
+            if (!db) await initIndexedDB();
+            
+            const transaction = db.transaction(['products', 'orders', 'deletedProducts'], 'readonly');
+            
+            const productsStore = transaction.objectStore('products');
+            const ordersStore = transaction.objectStore('orders');
+            const deletedStore = transaction.objectStore('deletedProducts');
+            
+            products = await getAll(productsStore);
+            orders = await getAll(ordersStore);
+            deletedProducts = await getAll(deletedStore);
+          } catch (dbError) {
+            console.log('IndexedDB failed, using localStorage');
+          }
           
-          const productsStore = transaction.objectStore('products');
-          const ordersStore = transaction.objectStore('orders');
-          const deletedStore = transaction.objectStore('deletedProducts');
-          
-          products = await getAll(productsStore);
-          orders = await getAll(ordersStore);
-          deletedProducts = await getAll(deletedStore);
-          
-          // Fallback to localStorage if IndexedDB is empty
+          // Fallback to localStorage if empty
           if (products.length === 0) {
             const savedProducts = localStorage.getItem('alzain_products');
-            if (savedProducts) {
-              products = JSON.parse(savedProducts);
-              await saveData();
-            }
+            if (savedProducts) products = JSON.parse(savedProducts);
           }
           
           if (orders.length === 0) {
@@ -1489,18 +1516,30 @@
         }
         
       } catch (error) {
-        console.error('Load error, falling back to localStorage:', error);
-        const savedProducts = localStorage.getItem('alzain_products');
-        const savedOrders = localStorage.getItem('alzain_orders');
-        const savedDeletedProducts = localStorage.getItem('alzain_deleted_products');
+        console.error('Load error, using localStorage fallback:', error);
         
-        if (savedProducts) products = JSON.parse(savedProducts);
-        if (savedOrders) orders = JSON.parse(savedOrders);
-        if (savedDeletedProducts) deletedProducts = JSON.parse(savedDeletedProducts);
+        try {
+          const savedProducts = localStorage.getItem('alzain_products');
+          const savedOrders = localStorage.getItem('alzain_orders');
+          const savedDeletedProducts = localStorage.getItem('alzain_deleted_products');
+          
+          if (savedProducts) products = JSON.parse(savedProducts);
+          if (savedOrders) orders = JSON.parse(savedOrders);
+          if (savedDeletedProducts) deletedProducts = JSON.parse(savedDeletedProducts);
+        } catch (e) {
+          console.error('All loading methods failed');
+        }
       }
       
-      nextProductId = Math.max(...products.map(p => p.id), 0) + 1;
-      nextOrderId = Math.max(...orders.map(o => o.id), 0) + 1;
+      // Ensure products is always an array
+      if (!Array.isArray(products)) products = [];
+      if (!Array.isArray(orders)) orders = [];
+      if (!Array.isArray(deletedProducts)) deletedProducts = [];
+      
+      nextProductId = products.length > 0 ? Math.max(...products.map(p => p.id || 0), 0) + 1 : 1;
+      nextOrderId = orders.length > 0 ? Math.max(...orders.map(o => o.id || 0), 0) + 1 : 1;
+      
+      console.log(`✅ Loaded: ${products.length} products, ${orders.length} orders`);
     }
 
     // Helper function to get all items from IndexedDB store
@@ -1514,62 +1553,68 @@
 
     // Save to Server API (primary) or IndexedDB/localStorage (fallback)
     async function saveData() {
+      console.log('💾 Saving data...');
+      
+      // Always save to localStorage as backup first
+      try {
+        localStorage.setItem('alzain_products', JSON.stringify(products));
+        localStorage.setItem('alzain_orders', JSON.stringify(orders));
+        localStorage.setItem('alzain_deleted_products', JSON.stringify(deletedProducts));
+      } catch (e) {
+        console.log('localStorage backup failed');
+      }
+      
       try {
         if (isOnlineMode) {
-          // Save to server API
+          // Save to server API with timeout
           console.log('📡 Saving data to server...');
-          const response = await fetch('/api/products', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ products })
-          });
           
-          const data = await response.json();
-          if (data.success) {
-            console.log('✅ Products saved to server');
-          } else {
-            throw new Error(data.error || 'Save failed');
+          try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+            
+            const response = await fetch('/api/products', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ products }),
+              signal: controller.signal
+            });
+            clearTimeout(timeoutId);
+            
+            const data = await response.json();
+            if (data.success) {
+              console.log('✅ Products saved to server');
+            } else {
+              throw new Error(data.error || 'Save failed');
+            }
+          } catch (fetchError) {
+            console.error('Server save failed:', fetchError);
+            // Data already saved to localStorage
           }
-          
-          // Save orders and deleted to localStorage
-          localStorage.setItem('alzain_orders', JSON.stringify(orders));
-          localStorage.setItem('alzain_deleted_products', JSON.stringify(deletedProducts));
           
         } else {
           // Save to IndexedDB
           if (db) {
-            const transaction = db.transaction(['products', 'orders', 'deletedProducts'], 'readwrite');
-            
-            const productsStore = transaction.objectStore('products');
-            const ordersStore = transaction.objectStore('orders');
-            const deletedStore = transaction.objectStore('deletedProducts');
-            
-            await clearAndPut(productsStore, products);
-            await clearAndPut(ordersStore, orders);
-            await clearAndPut(deletedStore, deletedProducts);
-          }
-          
-          // Also save to localStorage as backup
-          try {
-            localStorage.setItem('alzain_products', JSON.stringify(products));
-            localStorage.setItem('alzain_orders', JSON.stringify(orders));
-            localStorage.setItem('alzain_deleted_products', JSON.stringify(deletedProducts));
-          } catch (e) {
-            console.log('localStorage full, using IndexedDB only');
+            try {
+              const transaction = db.transaction(['products', 'orders', 'deletedProducts'], 'readwrite');
+              
+              const productsStore = transaction.objectStore('products');
+              const ordersStore = transaction.objectStore('orders');
+              const deletedStore = transaction.objectStore('deletedProducts');
+              
+              await clearAndPut(productsStore, products);
+              await clearAndPut(ordersStore, orders);
+              await clearAndPut(deletedStore, deletedProducts);
+            } catch (dbError) {
+              console.log('IndexedDB save failed, using localStorage');
+            }
           }
         }
         
+        console.log('✅ Data saved successfully');
         return true;
       } catch (e) {
         console.error('Save error:', e);
-        // Fallback to localStorage
-        try {
-          localStorage.setItem('alzain_products', JSON.stringify(products));
-          localStorage.setItem('alzain_orders', JSON.stringify(orders));
-          localStorage.setItem('alzain_deleted_products', JSON.stringify(deletedProducts));
-        } catch (e2) {
-          console.error('All save methods failed');
-        }
         return false;
       }
     }
